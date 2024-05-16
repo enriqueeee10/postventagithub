@@ -488,13 +488,13 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
     }
 
     private void menu(JPanel color) {
-        /* views.MenuCat.setBackground(new Color(51, 51, 51));
+        views.MenuCat.setBackground(new Color(51, 51, 51));
         views.MenuClientes.setBackground(new Color(51, 51, 51));
         views.MenuConfig.setBackground(new Color(51, 51, 51));
         views.MenuMedidas.setBackground(new Color(51, 51, 51));
         color.setBackground(new Color(0, 0, 0));
         views.MenuProv.setBackground(new Color(51, 51, 51));
-        views.MenuUsuarios.setBackground(new Color(51, 51, 51)); */
+        views.MenuUsuarios.setBackground(new Color(51, 51, 51));
     }
 
     private void limpiarBusqueda() {

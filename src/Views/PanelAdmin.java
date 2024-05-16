@@ -444,6 +444,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
         jPanel43 = new javax.swing.JPanel();
         jScrollPane17 = new javax.swing.JScrollPane();
         tableSala = new javax.swing.JTable();
@@ -602,7 +603,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelCompras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/carrito-de-supermercado (4).png"))); // NOI18N
         JLabelCompras.setText("Nueva Compra");
-        JLabelCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuComprasLayout = new javax.swing.GroupLayout(MenuCompras);
         MenuCompras.setLayout(MenuComprasLayout);
@@ -627,7 +628,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/productos.png"))); // NOI18N
         JLabelProductos.setText("Productos");
-        JLabelProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuProductosLayout = new javax.swing.GroupLayout(MenuProductos);
         MenuProductos.setLayout(MenuProductosLayout);
@@ -652,7 +653,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/grupo.png"))); // NOI18N
         JLabelClientes.setText("Clientes");
-        JLabelClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuClientesLayout = new javax.swing.GroupLayout(MenuClientes);
         MenuClientes.setLayout(MenuClientesLayout);
@@ -674,7 +675,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/usuarios.png"))); // NOI18N
         JLabelUsuarios.setText("Usuarios");
-        JLabelUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuUsuariosLayout = new javax.swing.GroupLayout(MenuUsuarios);
         MenuUsuarios.setLayout(MenuUsuariosLayout);
@@ -702,7 +703,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelProveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/proveedor (1).png"))); // NOI18N
         JLabelProveedor.setText("Proveedores");
-        JLabelProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuProvLayout = new javax.swing.GroupLayout(MenuProv);
         MenuProv.setLayout(MenuProvLayout);
@@ -724,7 +725,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelMedidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelMedidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/reduccion-de-peso.png"))); // NOI18N
         JLabelMedidas.setText("Medidas");
-        JLabelMedidas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelMedidas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuMedidasLayout = new javax.swing.GroupLayout(MenuMedidas);
         MenuMedidas.setLayout(MenuMedidasLayout);
@@ -746,7 +747,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelCat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelCat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/categorias.png"))); // NOI18N
         JLabelCat.setText("Categorias");
-        JLabelCat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuCatLayout = new javax.swing.GroupLayout(MenuCat);
         MenuCat.setLayout(MenuCatLayout);
@@ -768,7 +769,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelConfig.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/mantenimiento.png"))); // NOI18N
         JLabelConfig.setText("Configuración");
-        JLabelConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuConfigLayout = new javax.swing.GroupLayout(MenuConfig);
         MenuConfig.setLayout(MenuConfigLayout);
@@ -846,7 +847,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/dar-dinero.png"))); // NOI18N
         JLabelVentas.setText("Nueva Venta");
-        JLabelVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout MenuVentasLayout = new javax.swing.GroupLayout(MenuVentas);
         MenuVentas.setLayout(MenuVentasLayout);
@@ -1556,6 +1557,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jScrollPane3.setBorder(null);
         jScrollPane3.setForeground(new java.awt.Color(255, 255, 255));
 
+        TableClientes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1589,6 +1591,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jScrollPane4.setBorder(null);
         jScrollPane4.setForeground(new java.awt.Color(255, 255, 255));
 
+        TableProveedor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1696,6 +1699,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jScrollPane6.setBorder(null);
         jScrollPane6.setForeground(new java.awt.Color(255, 255, 255));
 
+        TableUsers.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1822,7 +1826,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jLabel33.setText("Producto");
         jPanel20.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
 
-        TableCompra.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        TableCompra.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TableCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2000,6 +2004,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jScrollPane8.setBorder(null);
         jScrollPane8.setForeground(new java.awt.Color(255, 255, 255));
 
+        TableCaja.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TableCaja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2093,6 +2098,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jScrollPane9.setBorder(null);
         jScrollPane9.setForeground(new java.awt.Color(255, 255, 255));
 
+        TableMedidas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TableMedidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2126,6 +2132,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jScrollPane10.setBorder(null);
         jScrollPane10.setForeground(new java.awt.Color(255, 255, 255));
 
+        TableCat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TableCat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2274,6 +2281,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPanel31.setBackground(new java.awt.Color(204, 204, 204));
         jPanel31.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TableVentas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TableVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2395,34 +2403,50 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab12", jPanel33);
 
-        jPanel118.setBackground(new java.awt.Color(0, 51, 204));
+        jPanel118.setBackground(new java.awt.Color(204, 204, 204));
         jPanel118.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel118.add(txtActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 200, 30));
-        jPanel118.add(txtNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 200, 30));
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        txtActual.setBackground(new java.awt.Color(255, 255, 255));
+        txtActual.setForeground(new java.awt.Color(51, 51, 51));
+        txtActual.setBorder(null);
+        jPanel118.add(txtActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 200, 30));
+
+        txtNueva.setBackground(new java.awt.Color(255, 255, 255));
+        txtNueva.setForeground(new java.awt.Color(51, 51, 51));
+        txtNueva.setBorder(null);
+        jPanel118.add(txtNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 200, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Contraseña actual");
-        jPanel118.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        jPanel118.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Nueva Contraseña");
-        jPanel118.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+        jPanel118.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
 
-        btnCambiar.setBackground(new java.awt.Color(0, 0, 0));
-        btnCambiar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnCambiar.setBackground(new java.awt.Color(51, 102, 255));
+        btnCambiar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCambiar.setForeground(new java.awt.Color(255, 255, 255));
         btnCambiar.setText("Cambiar");
         btnCambiar.setFocusable(false);
-        jPanel118.add(btnCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, 35));
+        jPanel118.add(btnCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, 35));
 
         btnCancelar.setBackground(new java.awt.Color(255, 0, 0));
-        btnCancelar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cerrar Sesión");
         btnCancelar.setFocusable(false);
-        jPanel118.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, 35));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel118.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, 35));
 
-        jPanel12.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -2435,9 +2459,10 @@ public class PanelAdmin extends javax.swing.JFrame {
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel118.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 40, 30));
+        jPanel118.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 40, 30));
 
-        jPanel13.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -2450,13 +2475,16 @@ public class PanelAdmin extends javax.swing.JFrame {
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel118.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 40, 30));
+        jPanel118.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 40, 30));
 
-        jLabel63.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel63.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel63.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel63.setForeground(new java.awt.Color(51, 51, 51));
         jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel63.setText("Cambiar Contraseña");
+        jLabel63.setText("Perfill");
         jPanel118.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 340, -1));
+
+        jLabel64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/logo_1.png"))); // NOI18N
+        jPanel118.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 130, 130));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -3676,6 +3704,10 @@ public class PanelAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdMedActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3866,6 +3898,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;

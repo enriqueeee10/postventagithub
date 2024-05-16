@@ -2,8 +2,6 @@
 package posventa;
 
 import Views.FrmLogin;
-import Views.MenuPrincipal;
-
 
 public class PosVenta {
 
@@ -13,9 +11,5 @@ public class PosVenta {
 
     } 
     
-     /*public static void main(String[] args) {
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.setVisible(true);
-    } */
 }
     
