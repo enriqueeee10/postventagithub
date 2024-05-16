@@ -964,7 +964,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         txtUserLogin.setBorder(null);
         jPanel2.add(txtUserLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 10, -1));
 
-        jLabel67.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        jLabel67.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel67.setForeground(new java.awt.Color(255, 255, 255));
         jLabel67.setText("Sistema Restaurante");
         jPanel2.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 18, -1, 40));
@@ -981,7 +981,7 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 153, 0));
 
-        JLHome.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        JLHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         JLHome.setForeground(new java.awt.Color(255, 255, 255));
         JLHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLHome.setText("EL VADO");
@@ -1056,7 +1056,9 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 255, 0));
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jLabel10.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/producto.png"))); // NOI18N
         jLabel10.setText("Productos");
@@ -1064,6 +1066,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jLabel10.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         TotalPro.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TotalPro.setForeground(new java.awt.Color(51, 51, 51));
         TotalPro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TotalPro.setText("...");
 
@@ -1086,7 +1089,8 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 0, 0));
 
-        JLabelCompra.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        JLabelCompra.setBackground(new java.awt.Color(51, 51, 51));
+        JLabelCompra.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         JLabelCompra.setForeground(new java.awt.Color(255, 255, 255));
         JLabelCompra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/compras.png"))); // NOI18N
@@ -1096,6 +1100,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelCompra.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         TotalCompras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TotalCompras.setForeground(new java.awt.Color(51, 51, 51));
         TotalCompras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TotalCompras.setText("...");
         TotalCompras.setToolTipText("");
@@ -1119,7 +1124,9 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 0));
 
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jLabel12.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Clientes.png"))); // NOI18N
         jLabel12.setText("Clientes");
@@ -1127,6 +1134,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jLabel12.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         TotalClientes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TotalClientes.setForeground(new java.awt.Color(51, 51, 51));
         TotalClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TotalClientes.setText("...");
         TotalClientes.setToolTipText("");
@@ -1150,7 +1158,7 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(255, 51, 204));
 
-        JLabelVenta.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        JLabelVenta.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         JLabelVenta.setForeground(new java.awt.Color(255, 255, 255));
         JLabelVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Carrito-de-compras.png"))); // NOI18N
@@ -1159,7 +1167,8 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         JLabelVenta.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        JLabelTotalVentas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        JLabelTotalVentas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        JLabelTotalVentas.setForeground(new java.awt.Color(51, 51, 51));
         JLabelTotalVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelTotalVentas.setText("...");
 

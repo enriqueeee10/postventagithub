@@ -98,11 +98,11 @@ public class VentasControllers implements ActionListener, MouseListener, KeyList
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == getViews().JLabelVenta) {
-            menu(getViews().MenuVentas);
+            //menu(getViews().MenuVentas);
             Listar();
             getViews().jTabbedPane1.setSelectedIndex(11);
         }else if (e.getSource() == getViews().JLabelCompra) {
-            menu(getViews().MenuCompras);
+            //menu(getViews().MenuCompras);
             ListarCompras();
             getViews().jTabbedPane1.setSelectedIndex(12);
         }
@@ -129,6 +129,7 @@ public class VentasControllers implements ActionListener, MouseListener, KeyList
         color.setBackground(new Color(0, 0, 0));
         getViews().MenuProv.setBackground(new Color(51, 51, 51));
         getViews().MenuUsuarios.setBackground(new Color(51, 51, 51));
+        
     }
     @Override
     public void mousePressed(MouseEvent me) {

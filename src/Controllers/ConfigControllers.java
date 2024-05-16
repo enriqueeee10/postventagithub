@@ -98,7 +98,7 @@ public class ConfigControllers implements ActionListener, MouseListener, KeyList
             conDao.torta(views.JPTorta);
         } else if (e.getSource() == views.JLabelConfig) {
             views.jTabbedPane1.setSelectedIndex(10);
-            menu();
+            //menu();
         }
     }
 

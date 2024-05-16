@@ -159,7 +159,7 @@ public class ProveedorControllers implements ActionListener, MouseListener, KeyL
         }else if (e.getSource() == views.JLabelProveedor) {
             views.jTabbedPane1.setSelectedIndex(4);
             Listar();
-            menu();
+            //menu();
         }
         
     }

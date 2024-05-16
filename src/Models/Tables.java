@@ -28,12 +28,12 @@ public class Tables extends DefaultTableCellRenderer{
                 setForeground(Color.white);
                 break;
                 
-                case "PENDIENTE":
+                case "Pendiente":
                 setBackground(Color.blue);
                 setForeground(Color.white);
                 break;
                 
-                case "FINALIZADO":
+                case "Finalizado":
                 setBackground(Color.red);
                 setForeground(Color.white);
                 break;

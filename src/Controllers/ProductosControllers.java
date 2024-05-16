@@ -259,7 +259,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
             views.cbxProveedor.setSelectedItem(pro.getProveedor());
         } else if (e.getSource() == views.JLabelProductos) {
             views.jTabbedPane1.setSelectedIndex(2);
-            menu(views.MenuProductos);
+            //menu(views.MenuProductos);
             views.MenuCompras.setBackground(new Color(51, 51, 51));
             views.MenuVentas.setBackground(new Color(51, 51, 51));
             views.cbxProveedor.removeAllItems();
@@ -271,13 +271,13 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
             Listar();
         } else if (e.getSource() == views.JLabelCompras) {
             views.jTabbedPane1.setSelectedIndex(6);
-            menu(views.MenuCompras);
+            //menu(views.MenuCompras);
             views.MenuVentas.setBackground(new Color(51, 51, 51));
             views.MenuProductos.setBackground(new Color(51, 51, 51));
             proDao.llenarCombo(views.txtProveedorC, "proveedor");
         } else if (e.getSource() == views.JLabelVentas) {
             views.jTabbedPane1.setSelectedIndex(1);
-            menu(views.MenuVentas);
+            //menu(views.MenuVentas);
             views.MenuCompras.setBackground(new Color(51, 51, 51));
             views.MenuProductos.setBackground(new Color(51, 51, 51));
             views.txtClienteNV.removeAllItems();
@@ -467,7 +467,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
     public void keyReleased(KeyEvent e) {
         if (e.getSource() == views.txtBuscarPro) {
             views.jTabbedPane1.setSelectedIndex(2);
-            menu(views.MenuProductos);
+            //menu(views.MenuProductos);
             Listar();
         } else if (e.getSource() == views.txtCantidadNV) {
             if (views.txtCantidadNV.getText().equals("")) {
@@ -488,13 +488,13 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
     }
 
     private void menu(JPanel color) {
-        views.MenuCat.setBackground(new Color(51, 51, 51));
+        /* views.MenuCat.setBackground(new Color(51, 51, 51));
         views.MenuClientes.setBackground(new Color(51, 51, 51));
         views.MenuConfig.setBackground(new Color(51, 51, 51));
         views.MenuMedidas.setBackground(new Color(51, 51, 51));
         color.setBackground(new Color(0, 0, 0));
         views.MenuProv.setBackground(new Color(51, 51, 51));
-        views.MenuUsuarios.setBackground(new Color(51, 51, 51));
+        views.MenuUsuarios.setBackground(new Color(51, 51, 51)); */
     }
 
     private void limpiarBusqueda() {

@@ -149,7 +149,7 @@ public class MedidasControllers implements ActionListener, MouseListener, KeyLis
             views.txtNombreCortoMed.setText(views.TableMedidas.getValueAt(fila, 2).toString());
         }else if(e.getSource() == views.JLabelMedidas){
             views.jTabbedPane1.setSelectedIndex(8);
-            menu();
+            //menu();
             Listar();
         }
     }

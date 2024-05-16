@@ -160,7 +160,7 @@ public class CategoriasControllers implements ActionListener, MouseListener, Key
             views.jTabbedPane1.setSelectedIndex(9);
             views.btnModificarCat.setEnabled(false);
             views.btnGuardarCat.setEnabled(true);
-            menu();
+            //menu();
             Listar();
         }
     }

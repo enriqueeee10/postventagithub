@@ -196,7 +196,7 @@ public class UsuariosControllers implements ActionListener, MouseListener, KeyLi
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == views.JLabelUsuarios) {
-            menu();
+            //menu();
             views.jTabbedPane1.setSelectedIndex(5);
             Listar();
             this.views.btnModificarUser.setEnabled(false);

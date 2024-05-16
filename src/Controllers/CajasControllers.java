@@ -108,7 +108,7 @@ public class CajasControllers implements ActionListener, MouseListener, KeyListe
             views.jTabbedPane1.setSelectedIndex(7);
             views.btnModificarCaja.setEnabled(false);
             views.btnGuardarCaja.setEnabled(true);
-            menu();
+            //menu();
             Listar();
         }else if(e.getSource() == cbxFilasPermitidas){
             paginado.eventosPag(cbxFilasPermitidas);

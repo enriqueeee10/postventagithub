@@ -164,7 +164,7 @@ public class ClientesControllers implements ActionListener, MouseListener, KeyLi
             views.txtDireccionCli.setText(views.TableClientes.getValueAt(fila, 3).toString());
         } else if (e.getSource() == views.JLabelClientes) {
             views.jTabbedPane1.setSelectedIndex(3);
-            menu();
+            //menu();
             Listar();
         }
     }
