@@ -100,16 +100,17 @@ public class PanelAdmin extends javax.swing.JFrame {
         this.us = us;
         if (us.getRol().equals("MOZO")) {
             JLabelConfig.setVisible(false);
-            jPanel5.setVisible(false);
+            jPanel5.setVisible(true);
             JLabelUsuarios.setVisible(false);
             JLabelClientes.setVisible(false);
-            JLabelCompra.setVisible(false);
+            JLabelCompra.setVisible(true);
             JLabelCompras.setVisible(false);
             JLabelMedidas.setVisible(false);
             JLabelProductos.setVisible(false);
             JLabelProveedor.setVisible(false);
             JLabelTotalVentas.setVisible(false);
-            JLabelVenta.setVisible(false);
+            JLabelVenta.setVisible(true);
+            JLabelTotalVentas.setVisible(true);
             JLabelVentas.setVisible(false);
             JLabelCat.setVisible(false);
             JMenuEliminarPro.setVisible(false);
@@ -199,6 +200,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         txtUserLogin = new javax.swing.JTextField();
         jLabel67 = new javax.swing.JLabel();
         txtCajaLogin = new javax.swing.JTextField();
+        LabelVendedor1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         JLHome = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -519,6 +521,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPanel34 = new javax.swing.JPanel();
         jScrollPane15 = new javax.swing.JScrollPane();
         PanelSalas = new javax.swing.JPanel();
+        LabelVendedor = new javax.swing.JLabel();
 
         JMenuEliminarMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/eliminar.png"))); // NOI18N
         JMenuEliminarMed.setText("Eliminar");
@@ -970,7 +973,11 @@ public class PanelAdmin extends javax.swing.JFrame {
         txtCajaLogin.setBorder(null);
         jPanel2.add(txtCajaLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 10, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 1080, 40));
+        LabelVendedor1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelVendedor1.setText("Administrador");
+        jPanel2.add(LabelVendedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 1080, 90));
 
         jPanel5.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -2180,52 +2187,70 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPanel30.setBackground(new java.awt.Color(255, 255, 255));
         jPanel30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel32.setBackground(new java.awt.Color(51, 51, 255));
-        jPanel32.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de la Empresa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
+        jPanel32.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel32.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de la Empresa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 51))); // NOI18N
         jPanel32.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel50.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(51, 51, 51));
         jLabel50.setText("Ruc");
         jPanel32.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
-        jLabel51.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel51.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel51.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(51, 51, 51));
         jLabel51.setText("Nombre");
         jPanel32.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jLabel52.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel52.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel52.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel52.setForeground(new java.awt.Color(51, 51, 51));
         jLabel52.setText("Teléfono");
         jPanel32.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        txtRucEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        txtRucEmpresa.setForeground(new java.awt.Color(51, 51, 51));
+        txtRucEmpresa.setBorder(null);
         jPanel32.add(txtRucEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 300, 33));
+
+        txtTelefonoEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        txtTelefonoEmpresa.setForeground(new java.awt.Color(51, 51, 51));
+        txtTelefonoEmpresa.setBorder(null);
         jPanel32.add(txtTelefonoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 300, 33));
 
-        btnModificarEmpresa.setBackground(new java.awt.Color(0, 0, 0));
         btnModificarEmpresa.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnModificarEmpresa.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/actualizar.png"))); // NOI18N
+        btnModificarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/flecha-de-carga.png"))); // NOI18N
         btnModificarEmpresa.setFocusable(false);
         jPanel32.add(btnModificarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, 90, 40));
 
-        jLabel53.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel53.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel53.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel53.setForeground(new java.awt.Color(51, 51, 51));
         jLabel53.setText("Dirección");
         jPanel32.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
-        jLabel54.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel54.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel54.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(51, 51, 51));
         jLabel54.setText("Mensaje");
         jPanel32.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+
+        txtNombreEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombreEmpresa.setForeground(new java.awt.Color(51, 51, 51));
+        txtNombreEmpresa.setBorder(null);
         jPanel32.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 300, 33));
 
+        txtDireccionEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        txtDireccionEmpresa.setForeground(new java.awt.Color(51, 51, 51));
         jScrollPane11.setViewportView(txtDireccionEmpresa);
 
         jPanel32.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 300, 50));
 
+        txtMensaje.setBackground(new java.awt.Color(255, 255, 255));
+        txtMensaje.setForeground(new java.awt.Color(51, 51, 51));
         jScrollPane12.setViewportView(txtMensaje);
 
         jPanel32.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 300, 50));
+
+        txtIdConfig.setBackground(new java.awt.Color(204, 204, 204));
+        txtIdConfig.setBorder(null);
         jPanel32.add(txtIdConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 70, -1));
 
         jPanel30.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 340, 490));
@@ -3115,6 +3140,10 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 1080, 610));
 
+        LabelVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelVendedor.setText("Administrador");
+        getContentPane().add(LabelVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void ListarPedidos() {
@@ -3125,7 +3154,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         for (int i = 0; i < Listar.size(); i++) {
             ob[0] = Listar.get(i).getId();
             ob[1] = Listar.get(i).getSala();
-            ob[2] = Listar.get(i).getUsuarioo();
+            ob[2] = Listar.get(i).getUsuario();
             ob[3] = Listar.get(i).getNum_mesa();
             ob[4] = Listar.get(i).getFecha();
             ob[5] = Listar.get(i).getTotal();
@@ -3213,6 +3242,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         ped.setId_sala(id_sala);
         ped.setNum_mesa(num_mesa);
         ped.setTotal(monto);
+        ped.setUsuario(LabelVendedor.getText());
         pedDao.RegistrarPedido(ped);
     }
 
@@ -3436,12 +3466,12 @@ public class PanelAdmin extends javax.swing.JFrame {
 
     private void TablePedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePedidosMouseClicked
         // TODO add your handling code here:
-        int fila = TablePedidos.rowAtPoint(evt.getPoint());
+       int fila = TablePedidos.rowAtPoint(evt.getPoint());
         int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
         LimpiarTable();
         verPedido(id_pedido);
         verPedidoDetalle(id_pedido);
-        jTabbedPane1.setSelectedIndex(18);
+        jTabbedPane1.setSelectedIndex(17);
         btnFinalizar.setEnabled(false);
         txtIdHistorialPedido.setText(""+id_pedido);
     }//GEN-LAST:event_TablePedidosMouseClicked
@@ -3687,6 +3717,8 @@ public class PanelAdmin extends javax.swing.JFrame {
     private javax.swing.JPopupMenu JPopupPro;
     private javax.swing.JPopupMenu JPopupProveedor;
     public javax.swing.JPopupMenu JPopupUser;
+    private javax.swing.JLabel LabelVendedor;
+    private javax.swing.JLabel LabelVendedor1;
     public javax.swing.JPanel MenuCat;
     public javax.swing.JPanel MenuClientes;
     public javax.swing.JPanel MenuCompras;

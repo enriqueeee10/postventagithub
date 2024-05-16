@@ -130,7 +130,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < Listar.size(); i++) {
             ob[0] = Listar.get(i).getId();
             ob[1] = Listar.get(i).getSala();
-            ob[2] = Listar.get(i).getUsuarioo();
+            ob[2] = Listar.get(i).getUsuario();
             ob[3] = Listar.get(i).getNum_mesa();
             ob[4] = Listar.get(i).getFecha();
             ob[5] = Listar.get(i).getTotal();

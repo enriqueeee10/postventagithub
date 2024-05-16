@@ -69,14 +69,14 @@ public class PedidosDao {
     }
     
     public int RegistrarPedido(Pedidos ped){
-        String sql = "INSERT INTO pedidos (id_sala, num_mesa, total, usuarioo) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO pedidos (id_sala, num_mesa, total, usuario) VALUES (?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, ped.getId_sala());
             ps.setInt(2, ped.getNum_mesa());
             ps.setDouble(3, ped.getTotal());
-            ps.setString(4, ped.getUsuarioo());
+            ps.setString(4, ped.getUsuario());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -186,7 +186,7 @@ public class PedidosDao {
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Image img = Image.getInstance(getClass().getResource("/Img/logo.png"));
+            Image img = Image.getInstance(getClass().getResource("/Img/titulo.png"));
             //Fecha
             String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
             try {
@@ -343,7 +343,7 @@ public class PedidosDao {
                ped.setNum_mesa(rs.getInt("num_mesa"));
                ped.setFecha(rs.getString("fecha"));
                ped.setTotal(rs.getDouble("total"));
-               ped.setUsuarioo(rs.getString("usuario"));
+               ped.setUsuario(rs.getString("usuario"));
                ped.setEstado(rs.getString("estado"));
                Lista.add(ped);
            }

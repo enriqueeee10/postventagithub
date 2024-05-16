@@ -7,20 +7,20 @@ public class Pedidos {
     private String fecha;
     private double total;
     private String sala;
-    private String usuarioo;
+    private String usuario;
     private String estado;
 
     public Pedidos() {
     }
 
-    public Pedidos(int id, int id_sala, int num_mesa, String fecha, double total, String sala, String usuarioo, String estado) {
+    public Pedidos(int id, int id_sala, int num_mesa, String fecha, double total, String sala, String usuario, String estado) {
         this.id = id;
         this.id_sala = id_sala;
         this.num_mesa = num_mesa;
         this.fecha = fecha;
         this.total = total;
         this.sala = sala;
-        this.usuarioo = usuarioo;
+        this.usuario = usuario;
         this.estado = estado;
     }
 
@@ -72,12 +72,12 @@ public class Pedidos {
         this.sala = sala;
     }
 
-    public String getUsuarioo() {
-        return usuarioo;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioo(String usuarioo) {
-        this.usuarioo = usuarioo;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getEstado() {

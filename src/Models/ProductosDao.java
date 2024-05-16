@@ -330,7 +330,7 @@ public class ProductosDao {
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Image img = Image.getInstance(getClass().getResource("/Assets/logo.jpg"));
+            Image img = Image.getInstance(getClass().getResource("/Assets/titulo.png"));
             //Fecha
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);

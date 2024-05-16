@@ -1,5 +1,6 @@
 package Models;
 
+import Views.FrmLogin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +37,9 @@ public class ConfigDao {
                 conf.setDireccion(rs.getString("direccion"));
                 conf.setMensaje(rs.getString("mensaje"));
             } else {
-                JOptionPane.showMessageDialog(null, "No hay Descripción");
+                //JOptionPane.showMessageDialog(null, "No hay Descripción");
+                FrmLogin l = new FrmLogin();
+                l.advertencia("No hay Descripción");
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -54,7 +57,9 @@ public class ConfigDao {
             ps.setString(5, conf.getMensaje());
             ps.setInt(6, conf.getId());
             ps.execute();
-            JOptionPane.showMessageDialog(null, "Información de la empresa actualizada");
+            //JOptionPane.showMessageDialog(null, "Información de la empresa actualizada");
+            FrmLogin l = new FrmLogin();
+            l.exito("Información de la empresa actualizada");
             return true;
         } catch (SQLException e) {
             return false;

@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/PedidosDao.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/MenuPrincipal.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/Pedidos.java</file>
             <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/DetallePedido.java</file>
+            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/ConfigDao.java</file>
             <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/PanelAdmin.java</file>
+            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/PlatosDao.java</file>
+            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/ConfigControllers.java</file>
+            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/CajasControllers.java</file>
             <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/posventa/PosVenta.java</file>
+            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/CategoriasControllers.java</file>
         </group>
     </open-files>
 </project-private>
