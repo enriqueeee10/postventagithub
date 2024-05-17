@@ -18,7 +18,7 @@ public class FrmLogin extends javax.swing.JFrame {
     
     public FrmLogin() {
         initComponents();
-        LoginControllers user = new LoginControllers(us, usDao, this);
+        this.setLocationRelativeTo(null);
         txtUsuario.setText("lramirezcenepo@gmail.com");
         txtClave.setText("leandro12345");
         barra.setVisible(false);
@@ -73,7 +73,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 51, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel2.setBackground(new java.awt.Color(14, 76, 117));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -88,9 +88,9 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/contrasena (1).png"))); // NOI18N
         jLabel5.setText("LOGIN");
 
-        txtUsuario.setBackground(new java.awt.Color(255, 153, 0));
+        txtUsuario.setBackground(new java.awt.Color(14, 76, 117));
         txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.setBorder(null);
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -103,9 +103,9 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Correo");
 
-        txtClave.setBackground(new java.awt.Color(255, 153, 0));
+        txtClave.setBackground(new java.awt.Color(14, 76, 117));
         txtClave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtClave.setForeground(new java.awt.Color(51, 51, 51));
+        txtClave.setForeground(new java.awt.Color(255, 255, 255));
         txtClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtClave.setBorder(null);
         txtClave.addActionListener(new java.awt.event.ActionListener() {
@@ -303,7 +303,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
     public void validar(){
     String correo = txtUsuario.getText();
-    String pass = String.valueOf(txtClave.getPassword());
+    String clave = String.valueOf(txtClave.getPassword());
     UsuariosDao usuariodao = new UsuariosDao();
 
     if (correo.isEmpty()) {
@@ -318,14 +318,14 @@ public class FrmLogin extends javax.swing.JFrame {
             l.error("Correo no registrado o no existe en el sistema.");
             return;
         }
-    if (pass.equals("")) {
+    if (clave.equals("")) {
         //JOptionPane.showMessageDialog(null, "Llene el campo contraseña");
         FrmLogin l = new FrmLogin();
         l.advertencia("Llene el campo contraseña");
         return;
     }
     
-    us = usDao.login(correo, pass);
+    us = usDao.login(correo, clave);
     if (us.getCorreo()!= null && us.getClave()!= null) {
         barra.setVisible(true);
         contador = -1;
@@ -335,6 +335,8 @@ public class FrmLogin extends javax.swing.JFrame {
         tiempo.start();
     } else {
         //JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
+        FrmLogin l = new FrmLogin();
+        l.error("Contraseña incorrecta");
     }
     }
     

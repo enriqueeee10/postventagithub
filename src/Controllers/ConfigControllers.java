@@ -98,7 +98,7 @@ public class ConfigControllers implements ActionListener, MouseListener, KeyList
             conDao.torta(views.JPTorta);
         } else if (e.getSource() == views.JLabelConfig) {
             views.jTabbedPane1.setSelectedIndex(10);
-            //menu();
+            menu();
         }
     }
 
@@ -112,14 +112,22 @@ public class ConfigControllers implements ActionListener, MouseListener, KeyList
 
     @Override
     public void mouseEntered(MouseEvent me) {
+        if (me.getSource() == views.JLabelCat ) {
+            views.JMenuEliminarCat.setBackground(new Color(255,51,51));
+        } else if (me.getSource()== views.JLabelClientes) {
+            views.MenuClientes.setBackground(new Color(255,51,51));
+            
+        }
+
+        
     }
 
     @Override
     public void mouseExited(MouseEvent me) {
     }
 
-    private void menu() {
-        views.MenuCat.setBackground(new Color(51, 51, 51));
+     private void menu() {
+        /* views.MenuCat.setBackground(new Color(51, 51, 51));
         views.MenuClientes.setBackground(new Color(51, 51, 51));
         views.MenuCompras.setBackground(new Color(51, 51, 51));
         views.MenuConfig.setBackground(new Color(0, 0, 0));
@@ -128,7 +136,8 @@ public class ConfigControllers implements ActionListener, MouseListener, KeyList
         views.MenuProv.setBackground(new Color(51, 51, 51));
         views.MenuUsuarios.setBackground(new Color(51, 51, 51));
         views.MenuVentas.setBackground(new Color(51, 51, 51));
-    }
+        */
+    } 
 
     private void ocultar() {
         views.txtIdLogin.setVisible(false);

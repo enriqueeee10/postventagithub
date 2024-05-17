@@ -54,22 +54,23 @@ public class RestSMS extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel2.setBackground(new java.awt.Color(14, 76, 117));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 0));
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/contrasena (1).png"))); // NOI18N
         jLabel1.setText("Restablecimiento");
 
-        txtusuario.setBackground(new java.awt.Color(255, 153, 0));
+        txtusuario.setBackground(new java.awt.Color(14, 76, 117));
         txtusuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtusuario.setForeground(new java.awt.Color(51, 51, 51));
         txtusuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtusuario.setBorder(new javax.swing.border.MatteBorder(null));
+        txtusuario.setBorder(null);
         txtusuario.setEnabled(false);
         txtusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,9 +80,11 @@ public class RestSMS extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Ingrese su nueva contraseña");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Confirme su Nueva Contraseña");
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
@@ -118,6 +121,7 @@ public class RestSMS extends javax.swing.JFrame {
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Telefono del Usuario");
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Lock.png"))); // NOI18N
@@ -126,18 +130,18 @@ public class RestSMS extends javax.swing.JFrame {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/User.png"))); // NOI18N
         jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        txtconfirma.setBackground(new java.awt.Color(255, 153, 0));
+        txtconfirma.setBackground(new java.awt.Color(14, 76, 117));
         txtconfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtconfirma.setBorder(new javax.swing.border.MatteBorder(null));
+        txtconfirma.setBorder(null);
         txtconfirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtconfirmaActionPerformed(evt);
             }
         });
 
-        txtnuevacontraseña.setBackground(new java.awt.Color(255, 153, 0));
+        txtnuevacontraseña.setBackground(new java.awt.Color(14, 76, 117));
         txtnuevacontraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtnuevacontraseña.setBorder(new javax.swing.border.MatteBorder(null));
+        txtnuevacontraseña.setBorder(null);
         txtnuevacontraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnuevacontraseñaActionPerformed(evt);

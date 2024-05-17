@@ -184,24 +184,23 @@ public class UsuariosDao extends Conexion{
         }
     }
 
-    public Usuarios login(String correo, String pass) {
+    public Usuarios login(String correo, String clave) {
         String sql = "SELECT * FROM usuarios WHERE correo = ? AND clave = ?";
         Usuarios l = new Usuarios();
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, correo);
-            ps.setString(2, pass);
+            ps.setString(2, clave);
             rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getRow() > 0) {
                     l.setId(rs.getInt("id"));
                     l.setNombre(rs.getString("nombre"));
                     l.setCorreo(rs.getString("correo"));
+                    l.setClave(rs.getString("clave"));
                     l.setUsuario(rs.getString("usuario"));
                     l.setCaja(rs.getString("caja"));
-                    l.setRol(rs.getString("rol"));
-                }
+                    l.setRol(rs.getString("rol")); 
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
