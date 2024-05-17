@@ -185,7 +185,7 @@ public class UsuariosDao extends Conexion{
     }
 
     public Usuarios login(String correo, String clave) {
-        String sql = "SELECT * FROM usuarios WHERE correo = ? AND clave = ?";
+        String sql = "SELECT * FROM usuarios WHERE correo = ? AND clave = ? AND estado = 'Activo'";
         Usuarios l = new Usuarios();
         try {
             con = cn.getConnection();
@@ -201,7 +201,8 @@ public class UsuariosDao extends Conexion{
                     l.setUsuario(rs.getString("usuario"));
                     l.setCaja(rs.getString("caja"));
                     l.setRol(rs.getString("rol")); 
-            }
+                    l.setEstado(rs.getString("estado"));
+            } 
         } catch (SQLException e) {
             System.out.println(e.toString());
         }

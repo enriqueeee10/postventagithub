@@ -20,7 +20,7 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         txtUsuario.setText("lramirezcenepo@gmail.com");
-        txtClave.setText("leandro12345");
+        txtClave.setText("admin12345");
         barra.setVisible(false);
     }
     
