@@ -121,16 +121,6 @@ public class VentasControllers implements ActionListener, MouseListener, KeyList
             
         }
     }
-    private void menu(JPanel color) {
-        getViews().MenuCat.setBackground(new Color(51, 51, 51));
-        getViews().MenuClientes.setBackground(new Color(51, 51, 51));
-        getViews().MenuConfig.setBackground(new Color(51, 51, 51));
-        getViews().MenuMedidas.setBackground(new Color(51, 51, 51));
-        color.setBackground(new Color(0, 0, 0));
-        getViews().MenuProv.setBackground(new Color(51, 51, 51));
-        getViews().MenuUsuarios.setBackground(new Color(51, 51, 51));
-        
-    }
     @Override
     public void mousePressed(MouseEvent me) {
     }

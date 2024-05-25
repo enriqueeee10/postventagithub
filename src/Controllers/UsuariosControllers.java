@@ -60,7 +60,132 @@ public class UsuariosControllers implements ActionListener, MouseListener, KeyLi
         this.views.TableUsers.getModel().addTableModelListener(this);
     }
     @Override
+    
     public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == views.btnGuardarUser) {
+        if (views.txtUsuario.getText().equals("") || views.txtNombreUser.getText().equals("")
+                || views.txtClaveUser.getPassword().equals("")) {
+            FrmLogin l = new FrmLogin();
+            l.advertencia("Todo los campos son obligatorios.");
+        } else {
+            us.setUsuario(views.txtUsuario.getText());
+            us.setNombre(views.txtNombreUser.getText());
+            us.setClave(String.valueOf(views.txtClaveUser.getPassword()));
+            us.setCaja(views.cbxCajaUser.getSelectedItem().toString());
+            us.setRol(views.cbxRolUser.getSelectedItem().toString());
+            if (usDao.registrar(us)) {
+                Nuevo();
+                Listar();
+                this.views.btnModificarUser.setEnabled(false);
+                this.views.btnGuardarUser.setEnabled(true);
+                FrmLogin l = new FrmLogin();
+                l.exito("Usuario Registrado.");
+            } else {
+                FrmLogin l = new FrmLogin();
+                l.advertencia("El usuario ya existe.");
+            }
+        }
+    } else if (e.getSource() == views.btnModificarUser) {
+        if (views.txtUsuario.getText().equals("") || views.txtNombreUser.getText().equals("")
+                || views.txtClaveUser.getPassword().equals("")) {
+            FrmLogin l = new FrmLogin();
+            l.advertencia("Todos los campos son obligatorios.");
+        } else {
+            us.setUsuario(views.txtUsuario.getText());
+            us.setNombre(views.txtNombreUser.getText());
+            us.setCaja(views.cbxCajaUser.getSelectedItem().toString());
+            us.setRol(views.cbxRolUser.getSelectedItem().toString());
+            us.setId(Integer.parseInt(views.txtIdUser.getText()));
+            if (usDao.modificar(us)) {
+                Nuevo();
+                Listar();
+                this.views.btnModificarUser.setEnabled(false);
+                this.views.btnGuardarUser.setEnabled(true);
+                FrmLogin l = new FrmLogin();
+                l.exito("Usuario Modificado con éxito.");
+            } else {
+                FrmLogin l = new FrmLogin();
+                l.advertencia("El usuario ya existe.");
+            }
+        }
+    } else if (e.getSource() == views.btnNuevoUser) {
+        Nuevo();
+        this.views.btnModificarUser.setEnabled(false);
+        this.views.btnGuardarUser.setEnabled(true);
+    } else if (e.getSource() == views.JMenuEliminarUsuarios) {
+        if (views.txtIdUser.getText().equals("")) {
+            FrmLogin l = new FrmLogin();
+            l.advertencia("Selecciona una fila para eliminar.");
+        } else {
+            int id = Integer.parseInt(views.txtIdUser.getText());
+            Usuarios usuario = usDao.obtenerUsuarioPorId(id); // 
+            if (usuario.getRol().equals("ADMINISTRADOR")) {
+                //JOptionPane.showMessageDialog(null, "No se puede eliminar a un Usuario Administrador");
+                FrmLogin l = new FrmLogin();
+                l.error("No se puede eliminar a un usuario Administrador.");
+            } else {
+                int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (pregunta == 0) {
+                    if (usDao.accion("Inactivo", id)) {
+                        Nuevo();
+                        Listar();
+                        this.views.btnModificarUser.setEnabled(false);
+                        this.views.btnGuardarUser.setEnabled(true);
+                        FrmLogin l = new FrmLogin();
+                        l.exito("Usuario eliminado.");
+                    } else {
+                        FrmLogin l = new FrmLogin();
+                        l.error("Error al eliminar usuario.");
+                    }
+                }
+            }
+        }
+    } else if (e.getSource() == views.JMenuReingresarUsuarios) {
+        if (views.txtIdUser.getText().equals("")) {
+            FrmLogin l = new FrmLogin();
+            l.advertencia("Selecciona una fila.");
+        } else {
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro de reingresar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (pregunta == 0) {
+                int id = Integer.parseInt(views.txtIdUser.getText());
+                if (usDao.accion("Activo", id)) {
+                    Nuevo();
+                    Listar();
+                    this.views.btnModificarUser.setEnabled(false);
+                    this.views.btnGuardarUser.setEnabled(true);
+                    FrmLogin l = new FrmLogin();
+                    l.exito("Usuario reingresado con éxito.");
+                } else {
+                    FrmLogin l = new FrmLogin();
+                    l.error("Error al reingresar.");
+                }
+            }
+        }
+    } else if (e.getSource() == views.btnCambiarPass) {
+        views.jTabbedPane1.setSelectedIndex(13);
+        views.txtActual.requestFocus();
+    } else if (e.getSource() == views.btnCambiar) {
+        if (views.txtActual.getText().equals("") || String.valueOf(views.txtNueva.getPassword()).equals("")) {
+            FrmLogin l = new FrmLogin();
+            l.advertencia("Rellene los campos.");
+        } else {
+            if (usDao.cambiar(views.txtIdLogin.getText(), views.txtActual.getText())) {
+                if (usDao.cambiarPass(String.valueOf(views.txtNueva.getPassword()), (views.txtIdLogin.getText()))) {
+                    FrmLogin frm = new FrmLogin();
+                    frm.setVisible(true);
+                    views.dispose();
+                }
+            } else {
+                FrmLogin l = new FrmLogin();
+                l.error("Contraseña actual incorrecta.");
+            }
+        }
+    } else if (e.getSource() == cbxFilasPermitidas) {
+        paginado.eventosPag(cbxFilasPermitidas);
+    }
+}
+
+    /* public void actionPerformed(ActionEvent e) {
         if (e.getSource() == views.btnGuardarUser) {
             if (views.txtUsuario.getText().equals("") || views.txtNombreUser.getText().equals("")
                     || views.txtClaveUser.getPassword().equals("")) {
@@ -191,7 +316,7 @@ public class UsuariosControllers implements ActionListener, MouseListener, KeyLi
         }else if(e.getSource() == cbxFilasPermitidas){
             paginado.eventosPag(cbxFilasPermitidas);
         }
-    }
+    } */
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -345,17 +470,6 @@ public class UsuariosControllers implements ActionListener, MouseListener, KeyLi
         if (e.getSource() == views.txtBuscarUser) {
             Listar();
         }
-    }
-    private void menu() {
-        views.MenuCat.setBackground(new Color(51,51,51));
-        views.MenuClientes.setBackground(new Color(51,51,51));
-        views.MenuCompras.setBackground(new Color(51,51,51));
-        views.MenuConfig.setBackground(new Color(51,51,51));
-        views.MenuMedidas.setBackground(new Color(51,51,51));
-        views.MenuProductos.setBackground(new Color(51,51,51));
-        views.MenuProv.setBackground(new Color(51,51,51));
-        views.MenuUsuarios.setBackground(new Color(0,0,0));
-        views.MenuVentas.setBackground(new Color(51,51,51));
     }
 
     @Override

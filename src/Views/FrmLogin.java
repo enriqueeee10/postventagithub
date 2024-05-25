@@ -20,7 +20,7 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         txtUsuario.setText("lramirezcenepo@gmail.com");
-        txtClave.setText("admin12345");
+        txtClave.setText("12345678");
         barra.setVisible(false);
     }
     
@@ -84,6 +84,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jLabel5.setBackground(new java.awt.Color(255, 153, 0));
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 3, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/contrasena (1).png"))); // NOI18N
         jLabel5.setText("LOGIN");
@@ -101,6 +102,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Correo");
 
         txtClave.setBackground(new java.awt.Color(14, 76, 117));
@@ -115,6 +117,7 @@ public class FrmLogin extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Contraseña");
 
         btnSalir.setBackground(new java.awt.Color(204, 0, 0));
@@ -168,7 +171,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 255));
-        jButton2.setText("Olvide mi Contraseña");
+        jButton2.setText("¿Olvidaste tu contraseña?");
         jButton2.setBorder(null);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -183,33 +186,30 @@ public class FrmLogin extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jButton2))
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUsuario)
-                                    .addComponent(jLabel6)
-                                    .addComponent(barra, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel4)
+                            .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(barra, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(VER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(OCULTAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(OCULTAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton2)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -238,9 +238,9 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(41, 41, 41)
                 .addComponent(jButton2)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 340, 520));
@@ -301,7 +301,7 @@ public class FrmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLoginMouseClicked
 
-    public void validar(){
+     public void validar(){
     String correo = txtUsuario.getText();
     String clave = String.valueOf(txtClave.getPassword());
     UsuariosDao usuariodao = new UsuariosDao();
@@ -339,6 +339,47 @@ public class FrmLogin extends javax.swing.JFrame {
         l.error("Contraseña incorrecta");
     }
     }
+    
+    /* public void validar() {
+    String correo = txtUsuario.getText();
+    String clave = String.valueOf(txtClave.getPassword());
+    UsuariosDao usuariodao = new UsuariosDao();
+    String estado = usuariodao.validarestado(correo);
+
+    if (correo.isEmpty()) {
+        FrmLogin l = new FrmLogin();
+        l.advertencia("Llene el campo correo");
+        return;
+    }
+    if (!usuariodao.correoExiste(correo)) {
+        FrmLogin l = new FrmLogin();
+        l.error("Correo no registrado o no existe en el sistema.");
+        return;
+    }
+    if (clave.isEmpty()) {
+        FrmLogin l = new FrmLogin();
+        l.advertencia("Llene el campo contraseña");
+        return;
+    }
+    if (!estado.equalsIgnoreCase("activo")) {
+        FrmLogin l = new FrmLogin();
+        l.advertencia("Usuario Inhabilitado, Solicite habilitación");
+        return;
+    }
+
+    Usuarios us = usuariodao.login(correo, clave);
+    if (us != null && us.getCorreo() != null && us.getClave() != null) {
+        barra.setVisible(true);
+        contador = -1;
+        barra.setValue(0);
+        barra.setStringPainted(true);
+        tiempo = new Timer(segundos, new BarraProgreso());
+        tiempo.start();
+    } else {
+        FrmLogin l = new FrmLogin();
+        l.error("Contraseña incorrecta");
+    }
+} */
     
     public void exito(String texto){
         Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, texto);

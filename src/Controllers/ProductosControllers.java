@@ -52,8 +52,8 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
         this.views.JLabelProductos.addMouseListener(this);
         this.views.JLabelCompras.addMouseListener(this);
         this.views.JLabelVentas.addMouseListener(this);
-        this.views.JMenuEliminarPro.addActionListener(this);
-        this.views.JMenuReingresarPro.addActionListener(this);
+        this.views.jMenuEliminarProductos.addActionListener(this);
+        this.views.jMenuReingresarProductos.addActionListener(this);
         this.views.txtBuscarPro.addKeyListener(this);
         this.views.txtNombrePro.addKeyListener(this);
         //Nueva venta
@@ -135,11 +135,12 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                     l.exito("Producto modificado");
                 }
             }
-        } else if (e.getSource() == views.JMenuEliminarPro) {
+        } else if (e.getSource() == views.jMenuEliminarProductos) {
             if (views.txtIdPro.getText().equals("") || views.txtIdPro.getText() == null) {
                 //JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar");
                 FrmLogin l = new FrmLogin();
                 l.advertencia("Seleccione una fila para eliminar");
+            } else{
                 int pregunta = JOptionPane.showConfirmDialog(null, "Estas seguro de eliminar", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (pregunta == 0) {
                     int id = Integer.parseInt(views.txtIdPro.getText());
@@ -147,11 +148,12 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                         Nuevo();
                         Listar();
                         //JOptionPane.showMessageDialog(null, "Producto Eliminado");
+                        FrmLogin l = new FrmLogin();
                         l.exito("Producto eliminado");
                     }
                 }
             }
-        } else if (e.getSource() == views.JMenuReingresarPro) {
+        } else if (e.getSource() == views.jMenuReingresarProductos) {
             if (views.txtIdPro.getText().equals("") || views.txtIdPro.getText() == null) {
                 //JOptionPane.showMessageDialog(null, "Seleccione una fila para reingresar");
                 FrmLogin l = new FrmLogin();
@@ -187,7 +189,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                 } else {
                     //JOptionPane.showMessageDialog(null, "Agrega productos a la tabla para proceder con la venta");
                     FrmLogin l = new FrmLogin();
-                    l.advertencia("Agrega productos a la tabla para proceder con la venta");
+                    l.advertencia("Agrega productos para proceder con la venta");
                     views.txtCodigoNV.requestFocus();
                 }
             } else {
@@ -210,7 +212,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
             } else {
                 //JOptionPane.showMessageDialog(null, "Agrega productos a la tabla para proceder con la Compra");
                 FrmLogin l = new FrmLogin();
-                l.advertencia("Agrega productos a la tabla para proceder con la Compra");
+                l.advertencia("Agrega productos para proceder con la compra");
                 views.txtCodigoC.requestFocus();
             }
         } else if (e.getSource() == views.btnPdfV) {
@@ -260,8 +262,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
         } else if (e.getSource() == views.JLabelProductos) {
             views.jTabbedPane1.setSelectedIndex(2);
             //menu(views.MenuProductos);
-            views.MenuCompras.setBackground(new Color(51, 51, 51));
-            views.MenuVentas.setBackground(new Color(51, 51, 51));
+    
             views.cbxProveedor.removeAllItems();
             views.cbxMedida.removeAllItems();
             views.cbxCat.removeAllItems();
@@ -272,14 +273,12 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
         } else if (e.getSource() == views.JLabelCompras) {
             views.jTabbedPane1.setSelectedIndex(6);
             //menu(views.MenuCompras);
-            views.MenuVentas.setBackground(new Color(51, 51, 51));
-            views.MenuProductos.setBackground(new Color(51, 51, 51));
+
             proDao.llenarCombo(views.txtProveedorC, "proveedor");
         } else if (e.getSource() == views.JLabelVentas) {
             views.jTabbedPane1.setSelectedIndex(1);
             //menu(views.MenuVentas);
-            views.MenuCompras.setBackground(new Color(51, 51, 51));
-            views.MenuProductos.setBackground(new Color(51, 51, 51));
+
             views.txtClienteNV.removeAllItems();
             proDao.llenarCombo(views.txtClienteNV, "clientes");
         }
@@ -485,16 +484,6 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                 views.txtVuelto.setText("" + (pagar - monto));
             }
         }
-    }
-
-    private void menu(JPanel color) {
-        views.MenuCat.setBackground(new Color(51, 51, 51));
-        views.MenuClientes.setBackground(new Color(51, 51, 51));
-        views.MenuConfig.setBackground(new Color(51, 51, 51));
-        views.MenuMedidas.setBackground(new Color(51, 51, 51));
-        color.setBackground(new Color(0, 0, 0));
-        views.MenuProv.setBackground(new Color(51, 51, 51));
-        views.MenuUsuarios.setBackground(new Color(51, 51, 51));
     }
 
     private void limpiarBusqueda() {

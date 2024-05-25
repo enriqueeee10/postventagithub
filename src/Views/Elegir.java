@@ -44,6 +44,7 @@ public class Elegir extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(14, 76, 117));
@@ -53,6 +54,7 @@ public class Elegir extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 0));
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/contrasena (1).png"))); // NOI18N
         jLabel1.setText("ELECCIÓN");
@@ -98,6 +100,7 @@ public class Elegir extends javax.swing.JFrame {
         btnsms.setText("SMS");
         btnsms.setBorderPainted(false);
         btnsms.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnsms.setEnabled(false);
         btnsms.setFocusPainted(false);
         btnsms.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

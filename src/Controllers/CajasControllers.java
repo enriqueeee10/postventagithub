@@ -149,18 +149,6 @@ public class CajasControllers implements ActionListener, MouseListener, KeyListe
         views.txtTotalVentas.setText("");
     }
 
-    private void menu() {
-        views.MenuCat.setBackground(new Color(51, 51, 51));
-        views.MenuClientes.setBackground(new Color(51, 51, 51));
-        views.MenuCompras.setBackground(new Color(51, 51, 51));
-        views.MenuConfig.setBackground(new Color(51, 51, 51));
-        views.MenuMedidas.setBackground(new Color(51, 51, 51));
-        views.MenuProductos.setBackground(new Color(51, 51, 51));
-        views.MenuProv.setBackground(new Color(51, 51, 51));
-        views.MenuUsuarios.setBackground(new Color(51, 51, 51));
-        views.MenuVentas.setBackground(new Color(0, 0, 0));
-    }
-
     @Override
     public void keyTyped(KeyEvent e) {
        

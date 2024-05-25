@@ -79,15 +79,6 @@ public class ConfigControllers implements ActionListener, MouseListener, KeyList
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == views.JLHome) {
             views.jTabbedPane1.setSelectedIndex(0);
-            views.MenuConfig.setBackground(new Color(51, 51, 51));
-            views.MenuCat.setBackground(new Color(51, 51, 51));
-            views.MenuClientes.setBackground(new Color(51, 51, 51));
-            views.MenuCompras.setBackground(new Color(51, 51, 51));
-            views.MenuMedidas.setBackground(new Color(51, 51, 51));
-            views.MenuProductos.setBackground(new Color(51, 51, 51));
-            views.MenuProv.setBackground(new Color(51, 51, 51));
-            views.MenuUsuarios.setBackground(new Color(51, 51, 51));
-            views.MenuVentas.setBackground(new Color(51, 51, 51));
             views.TotalPro.setText("" + conDao.admin("productos"));
             views.TotalClientes.setText("" + conDao.admin("clientes"));
             views.TotalCompras.setText("" + conDao.adminTotal("compras"));
@@ -98,7 +89,6 @@ public class ConfigControllers implements ActionListener, MouseListener, KeyList
             conDao.torta(views.JPTorta);
         } else if (e.getSource() == views.JLabelConfig) {
             views.jTabbedPane1.setSelectedIndex(10);
-            menu();
         }
     }
 
@@ -126,18 +116,6 @@ public class ConfigControllers implements ActionListener, MouseListener, KeyList
     public void mouseExited(MouseEvent me) {
     }
 
-     private void menu() {
-        /* views.MenuCat.setBackground(new Color(51, 51, 51));
-        views.MenuClientes.setBackground(new Color(51, 51, 51));
-        views.MenuCompras.setBackground(new Color(51, 51, 51));
-        views.MenuConfig.setBackground(new Color(0, 0, 0));
-        views.MenuMedidas.setBackground(new Color(51, 51, 51));
-        views.MenuProductos.setBackground(new Color(51, 51, 51));
-        views.MenuProv.setBackground(new Color(51, 51, 51));
-        views.MenuUsuarios.setBackground(new Color(51, 51, 51));
-        views.MenuVentas.setBackground(new Color(51, 51, 51));
-        */
-    } 
 
     private void ocultar() {
         views.txtIdLogin.setVisible(false);

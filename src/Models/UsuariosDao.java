@@ -44,6 +44,7 @@ public class UsuariosDao extends Conexion{
         return res;
     }
     
+    
         public boolean modificar(Usuarios us) {
         String sql = "INSERT INTO usuarios (usuario, nombre, correo, clave, caja, rol) VALUES (?,?,?,?,?,?)";
         
@@ -183,9 +184,39 @@ public class UsuariosDao extends Conexion{
             }
         }
     }
+    
+    public Usuarios obtenerUsuarioPorId(int id) {
+        String sql = "SELECT * FROM usuarios WHERE id = ?";
+        Usuarios usuario = null;
+
+        try (Connection con = cn.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setInt(1, id);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuarios();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setUsuario(rs.getString("usuario"));
+                    usuario.setNombre(rs.getString("nombre"));
+                    usuario.setCorreo(rs.getString("correo"));
+                    usuario.setClave(rs.getString("clave"));
+                    usuario.setCaja(rs.getString("caja"));
+                    usuario.setRol(rs.getString("rol"));
+                    usuario.setEstado(rs.getString("estado"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return usuario;
+    }
+    
 
     public Usuarios login(String correo, String clave) {
-        String sql = "SELECT * FROM usuarios WHERE correo = ? AND clave = ? AND estado = 'Activo'";
+        String sql = "SELECT * FROM usuarios WHERE correo = ? AND clave = ?";
         Usuarios l = new Usuarios();
         try {
             con = cn.getConnection();
@@ -194,6 +225,11 @@ public class UsuariosDao extends Conexion{
             ps.setString(2, clave);
             rs = ps.executeQuery();
             if (rs.next()) {
+                 if ("Inactivo".equals(rs.getString("estado"))) {
+                    JOptionPane.showMessageDialog(null, "Usuario inactivo");
+                    
+                    return l;
+                }
                     l.setId(rs.getInt("id"));
                     l.setNombre(rs.getString("nombre"));
                     l.setCorreo(rs.getString("correo"));
@@ -202,13 +238,15 @@ public class UsuariosDao extends Conexion{
                     l.setCaja(rs.getString("caja"));
                     l.setRol(rs.getString("rol")); 
                     l.setEstado(rs.getString("estado"));
-            } 
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+            }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return l;
     }
-
+    
     public boolean cambiar(String correo, String pass) {
         boolean respuesta = false;
         String sql = "SELECT * FROM usuarios WHERE correo = ? AND clave = ?";
@@ -229,6 +267,36 @@ public class UsuariosDao extends Conexion{
         }
         return respuesta;
     }
+    
+    /* public String validarestado(String correo) {
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    Connection con = getConnection(); // Obtener conexión desde la clase padre
+    String query = "SELECT estado FROM usuarios WHERE correo = ?";
+    try {
+        ps = con.prepareStatement(query);
+        ps.setString(1, correo);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getString("estado");
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    return null;
+} */
 
     /*public boolean cambiarPass(String correo, String nuevaContraseña) {
     String sql = "UPDATE usuarios SET clave = ? WHERE correo = ?";

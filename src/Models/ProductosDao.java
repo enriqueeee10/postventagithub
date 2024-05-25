@@ -320,7 +320,7 @@ public class ProductosDao {
         return respuesta;
     }
 
-    public void pdfV(int idventa, String Cliente, String total, String usuario) {
+      public void pdfV(int idventa, String Cliente, String total, String usuario) {
         try {
             Date date = new Date();
             FileOutputStream archivo;
@@ -465,7 +465,163 @@ public class ProductosDao {
         } catch (DocumentException | IOException e) {
             System.out.println(e.toString());
         }
+    } 
+    
+    /* public void pdfV(int idventa, String Cliente, String total, String usuario) {
+    Document doc = null;
+    try {
+        Date date = new Date();
+        FileOutputStream archivo;
+        String url = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
+        File salida = new File(url + "/venta.pdf");
+        archivo = new FileOutputStream(salida);
+        doc = new Document(new Rectangle(226.77f, 806.77f)); // 80mm width
+        PdfWriter.getInstance(doc, archivo);
+        doc.open();
+        Font font = new Font(Font.FontFamily.TIMES_ROMAN, 6);
+        Paragraph fecha = new Paragraph();
+        fecha.add(Chunk.NEWLINE);
+        fecha.add(new Phrase("Vendedor: " + usuario + "\nFolio: " + idventa + "\nFecha: "
+                + new SimpleDateFormat("dd/MM/yyyy").format(date) + "\n\n", font));
+        fecha.setAlignment(Element.ALIGN_CENTER);
+        PdfPTable Encabezado = new PdfPTable(4);
+        Encabezado.setWidthPercentage(100);
+        Encabezado.getDefaultCell().setBorder(0);
+        float[] columnWidthsEncabezado = new float[]{25f, 25f, 25f, 25f};
+        Encabezado.setWidths(columnWidthsEncabezado);
+        Encabezado.setHorizontalAlignment(Element.ALIGN_CENTER);
+        
+        PdfPCell cell = new PdfPCell(new Phrase("RUC:\n123456789", font));
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        Encabezado.addCell(cell);
+        
+        PdfPCell cell2 = new PdfPCell(new Phrase("Nombre:\nvado eirl asdas", font));
+        cell2.setBorder(Rectangle.NO_BORDER);
+        cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+        Encabezado.addCell(cell2);
+        
+        PdfPCell cell3 = new PdfPCell(new Phrase("Teléfono:\n112391923", font));
+        cell3.setBorder(Rectangle.NO_BORDER);
+        cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        Encabezado.addCell(cell3);
+        
+        PdfPCell cell4 = new PdfPCell(new Phrase("Dirección:\nasidiw", font));
+        cell4.setBorder(Rectangle.NO_BORDER);
+        cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+        Encabezado.addCell(cell4);
+        
+        Encabezado.addCell(fecha);
+        doc.add(Encabezado);
+        
+        Paragraph cli = new Paragraph();
+        cli.add(Chunk.NEWLINE);
+        cli.add(new Phrase("DATOS DEL CLIENTE\n\n", font));
+        cli.setAlignment(Element.ALIGN_CENTER);
+        doc.add(cli);
+
+        PdfPTable proveedor = new PdfPTable(3);
+        proveedor.setWidthPercentage(100);
+        proveedor.getDefaultCell().setBorder(0);
+        float[] columnWidthsCliente = new float[]{33.33f, 33.33f, 33.33f};
+        proveedor.setWidths(columnWidthsCliente);
+        proveedor.setHorizontalAlignment(Element.ALIGN_CENTER);
+        PdfPCell cliNom = new PdfPCell(new Phrase("Nombre", font));
+        PdfPCell cliTel = new PdfPCell(new Phrase("Teléfono", font));
+        PdfPCell cliDir = new PdfPCell(new Phrase("Dirección", font));
+        cliNom.setBorder(Rectangle.NO_BORDER);
+        cliTel.setBorder(Rectangle.NO_BORDER);
+        cliDir.setBorder(Rectangle.NO_BORDER);
+        proveedor.addCell(cliNom);
+        proveedor.addCell(cliTel);
+        proveedor.addCell(cliDir);
+        
+        String prove = "SELECT * FROM clientes WHERE nombre = ?";
+        try {
+            ps = con.prepareStatement(prove);
+            ps.setString(1, Cliente);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                proveedor.addCell(new Phrase(rs.getString("nombre"), font));
+                proveedor.addCell(new Phrase(rs.getString("telefono"), font));
+                proveedor.addCell(new Phrase(rs.getString("direccion") + "\n\n", font));
+            } else {
+                proveedor.addCell(new Phrase("Publico en General", font));
+                proveedor.addCell(new Phrase("S/N", font));
+                proveedor.addCell(new Phrase("S/N\n\n", font));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        doc.add(proveedor);
+
+        PdfPTable tabla = new PdfPTable(4);
+        tabla.setWidthPercentage(100);
+        tabla.getDefaultCell().setBorder(0);
+        float[] columnWidths = new float[]{10f, 40f, 20f, 20f};
+        tabla.setWidths(columnWidths);
+        tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
+        PdfPCell c1 = new PdfPCell(new Phrase("Cant.", font));
+        PdfPCell c2 = new PdfPCell(new Phrase("Descripción.", font));
+        PdfPCell c3 = new PdfPCell(new Phrase("P. unit.", font));
+        PdfPCell c4 = new PdfPCell(new Phrase("Total", font));
+        c1.setBorder(Rectangle.NO_BORDER);
+        c2.setBorder(Rectangle.NO_BORDER);
+        c3.setBorder(Rectangle.NO_BORDER);
+        c4.setBorder(Rectangle.NO_BORDER);
+        c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        c3.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        c4.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        tabla.addCell(c1);
+        tabla.addCell(c2);
+        tabla.addCell(c3);
+        tabla.addCell(c4);
+        
+        String product = "SELECT d.id, d.id_venta, d.id_producto, d.precio, d.cantidad, p.id, p.id, p.nombre FROM detalle_venta d INNER JOIN productos p WHERE d.id_producto = p.id AND d.id_venta = ?";
+        try {
+            ps = con.prepareStatement(product);
+            ps.setInt(1, idventa);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                double subTotal = rs.getInt("cantidad") * rs.getDouble("precio");
+                tabla.addCell(new Phrase(rs.getString("cantidad"), font));
+                tabla.addCell(new Phrase(rs.getString("nombre"), font));
+                tabla.addCell(new Phrase(rs.getString("precio"), font));
+                tabla.addCell(new Phrase(String.valueOf(subTotal), font));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        doc.add(tabla);
+        
+        Paragraph info = new Paragraph();
+        info.add(Chunk.NEWLINE);
+        info.add(new Phrase("Total S/: " + total, font));
+        info.setAlignment(Element.ALIGN_RIGHT);
+        doc.add(info);
+        
+        Paragraph firma = new Paragraph();
+        firma.add(Chunk.NEWLINE);
+        firma.add(new Phrase("Cancelación \n\n", font));
+        firma.add(new Phrase("------------------------------------\n", font));
+        firma.add(new Phrase("Firma \n", font));
+        firma.setAlignment(Element.ALIGN_CENTER);
+        doc.add(firma);
+        
+        Paragraph gr = new Paragraph();
+        gr.add(Chunk.NEWLINE);
+        gr.add(new Phrase("mensaje", font));
+        gr.setAlignment(Element.ALIGN_CENTER);
+        doc.add(gr);
+        
+        doc.close();
+        archivo.close();
+        Desktop.getDesktop().open(salida);
+    } catch (DocumentException | IOException e) {
+        System.out.println(e.toString());
     }
+} */
 
     public void pdfC(int idcompra, String proveedor, String total) {
         try {
