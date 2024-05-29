@@ -64,20 +64,20 @@ public class UsuariosControllers implements ActionListener, MouseListener, KeyLi
     public void actionPerformed(ActionEvent e) {
     if (e.getSource() == views.btnGuardarUser) {
         if (views.txtUsuario.getText().equals("") || views.txtNombreUser.getText().equals("")
-                || views.txtClaveUser.getPassword().equals("")) {
+                    || views.txtClaveUser.getPassword().equals("")) {
             FrmLogin l = new FrmLogin();
             l.advertencia("Todo los campos son obligatorios.");
         } else {
-            us.setUsuario(views.txtUsuario.getText());
-            us.setNombre(views.txtNombreUser.getText());
-            us.setClave(String.valueOf(views.txtClaveUser.getPassword()));
-            us.setCaja(views.cbxCajaUser.getSelectedItem().toString());
-            us.setRol(views.cbxRolUser.getSelectedItem().toString());
+                us.setUsuario(views.txtUsuario.getText());
+                us.setNombre(views.txtNombreUser.getText());
+                us.setClave(String.valueOf(views.txtClaveUser.getPassword()));
+                us.setCaja(views.cbxCajaUser.getSelectedItem().toString());
+                us.setRol(views.cbxRolUser.getSelectedItem().toString());
             if (usDao.registrar(us)) {
-                Nuevo();
-                Listar();
-                this.views.btnModificarUser.setEnabled(false);
-                this.views.btnGuardarUser.setEnabled(true);
+                 Nuevo();
+                 Listar();
+                    this.views.btnModificarUser.setEnabled(false);
+                    this.views.btnGuardarUser.setEnabled(true);
                 FrmLogin l = new FrmLogin();
                 l.exito("Usuario Registrado.");
             } else {
@@ -87,20 +87,21 @@ public class UsuariosControllers implements ActionListener, MouseListener, KeyLi
         }
     } else if (e.getSource() == views.btnModificarUser) {
         if (views.txtUsuario.getText().equals("") || views.txtNombreUser.getText().equals("")
-                || views.txtClaveUser.getPassword().equals("")) {
+                    || views.txtClaveUser.getPassword().equals("")) {
             FrmLogin l = new FrmLogin();
             l.advertencia("Todos los campos son obligatorios.");
         } else {
-            us.setUsuario(views.txtUsuario.getText());
-            us.setNombre(views.txtNombreUser.getText());
-            us.setCaja(views.cbxCajaUser.getSelectedItem().toString());
-            us.setRol(views.cbxRolUser.getSelectedItem().toString());
-            us.setId(Integer.parseInt(views.txtIdUser.getText()));
-            if (usDao.modificar(us)) {
-                Nuevo();
-                Listar();
-                this.views.btnModificarUser.setEnabled(false);
-                this.views.btnGuardarUser.setEnabled(true);
+                us.setUsuario(views.txtUsuario.getText());
+                us.setNombre(views.txtNombreUser.getText());
+                us.setClave(String.valueOf(views.txtClaveUser.getPassword()));
+                us.setCaja(views.cbxCajaUser.getSelectedItem().toString());
+                us.setRol(views.cbxRolUser.getSelectedItem().toString());
+                us.setId(Integer.parseInt(views.txtIdUser.getText()));
+            if (usDao.actualizar(us)) {
+                    Nuevo();
+                    Listar();
+                    this.views.btnModificarUser.setEnabled(false);
+                    this.views.btnGuardarUser.setEnabled(true);
                 FrmLogin l = new FrmLogin();
                 l.exito("Usuario Modificado con éxito.");
             } else {

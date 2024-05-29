@@ -3,26 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/Usuarios.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/UsuariosDao.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/ProveedorControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/MedidasControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/UsuariosControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/PanelAdmin.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/ConfigControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/RestCorreo.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/ProductosControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/RecCorreo.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/Elegir.java</file>
             <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/VentasControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/FrmLogin.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/CajasControllers.java</file>
+            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Views/PanelAdmin.java</file>
             <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/posventa/PosVenta.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/CategoriasControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Models/VentaDao.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/Ctrl_User.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/ClientesControllers.java</file>
-            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/LoginControllers.java</file>
+            <file>file:/D:/NetBeans/NetBeans-21/NetBeansProjects/PosVenta/src/Controllers/ProductosControllers.java</file>
         </group>
     </open-files>
 </project-private>

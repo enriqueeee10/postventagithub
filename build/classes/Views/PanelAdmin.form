@@ -1429,6 +1429,9 @@
                       <Image iconType="3" name="/Assets/proveedor-alternativo.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Productos"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="verticalTextPosition" type="int" value="1"/>
                   </Properties>
@@ -1497,7 +1500,7 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Compras"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Hand Cursor"/>
                     </Property>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="verticalTextPosition" type="int" value="1"/>
@@ -1570,6 +1573,9 @@
                       <Image iconType="3" name="/Assets/revisar.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Clientes"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="verticalTextPosition" type="int" value="1"/>
                   </Properties>
@@ -1636,7 +1642,7 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ventas"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Hand Cursor"/>
                     </Property>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="verticalTextPosition" type="int" value="1"/>

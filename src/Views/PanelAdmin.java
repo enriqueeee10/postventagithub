@@ -123,7 +123,34 @@ public class PanelAdmin extends javax.swing.JFrame {
             JMenuEliminarCat.setVisible(false);
             JMenuReingresarCat.setVisible(false);
             
-        }
+        }  else if (us.getRol().equals("CAJERO")) {
+        // Configuración específica para el rol "CAJERO"
+        JLabelConfig.setVisible(false);
+        jPanel5.setVisible(true);
+        JLabelUsuarios.setVisible(false);
+        JLabelClientes.setVisible(true);
+        JLabelCompra.setVisible(true);
+        JLabelCompras.setVisible(true);
+        JLabelMedidas.setVisible(true);
+        JLabelProductos.setVisible(true);
+        JLabelProveedor.setVisible(false);
+        JLabelTotalVentas.setVisible(true);
+        JLabelVenta.setVisible(true);
+        JLabelTotalVentas.setVisible(true);
+        JLabelVentas.setVisible(true);
+        JLabelCat.setVisible(true);
+        JMenuEliminarPro.setVisible(false);
+        JMenuReingresarPro.setVisible(false);
+        JMenuEliminarProv.setVisible(false);
+        JMenuReingresarProv.setVisible(false);
+        JMenuEliminarMed.setVisible(false);
+        JMenuReingresarMed.setVisible(false);
+        JMenuEliminarCat.setVisible(false);
+        JMenuReingresarCat.setVisible(false);
+        btnPlatos.setVisible(false);
+        btnSala.setVisible(false);
+        btnVentas.setVisible(false);
+    }
         btnCambiarPass.setText(us.getRol());
         txtUserLogin.setText(us.getUsuario());
         txtCajaLogin.setText(us.getCaja());
@@ -1228,6 +1255,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/proveedor-alternativo.png"))); // NOI18N
         jLabel10.setText("Productos");
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel10.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -1261,7 +1289,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelCompra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/carro-de-compras-rapido.png"))); // NOI18N
         JLabelCompra.setText("Compras");
-        JLabelCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JLabelCompra.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         JLabelCompra.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -1296,6 +1324,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/revisar.png"))); // NOI18N
         jLabel12.setText("Clientes");
+        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel12.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -1329,7 +1358,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         JLabelVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLabelVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/dolar-de-saco.png"))); // NOI18N
         JLabelVenta.setText("Ventas");
-        JLabelVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        JLabelVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JLabelVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         JLabelVenta.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 

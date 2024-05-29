@@ -46,7 +46,7 @@ public class UsuariosDao extends Conexion{
     
     
         public boolean modificar(Usuarios us) {
-        String sql = "INSERT INTO usuarios (usuario, nombre, correo, clave, caja, rol) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios (usuario, nombre, clave, caja, rol) VALUES (?,?,?,?,?)";
         
         try {
             con = cn.getConnection();
@@ -88,10 +88,9 @@ public class UsuariosDao extends Conexion{
             ps = con.prepareStatement(sql);
             ps.setString(1, reg.getUsuario());
             ps.setString(2, reg.getNombre());
-            ps.setString(3, reg.getCorreo());
-            ps.setString(4, reg.getCaja());
-            ps.setString(5, reg.getRol());
-            ps.setInt(6, reg.getId());
+            ps.setString(3, reg.getCaja());
+            ps.setString(4, reg.getRol());
+            ps.setInt(5, reg.getId());
             ps.execute();
             res = true;
         } catch (SQLException ex) {
