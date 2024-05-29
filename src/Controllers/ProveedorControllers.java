@@ -236,7 +236,7 @@ public class ProveedorControllers implements ActionListener, MouseListener, KeyL
     }
 
     public TotalRows<Proveedor> ListarProveedor() {
-        List<Proveedor> lista = provDao.Listar(views.txtBuscarCli.getText());
+        List<Proveedor> lista = provDao.Listar(views.txtBuscarProv.getText());
         return new TotalRows<Proveedor>() {
             @Override
             public int getTotalRowCount() {
