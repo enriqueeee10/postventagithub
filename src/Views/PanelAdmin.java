@@ -5,11 +5,13 @@ import Controllers.CajasControllers;
 import Controllers.CategoriasControllers;
 import Controllers.ClientesControllers;
 import Controllers.ConfigControllers;
+import Controllers.MarcasControllers;
 import Controllers.MedidasControllers;
 import Controllers.ProductosControllers;
 import Controllers.ProveedorControllers;
 import Controllers.UsuariosControllers;
 import Controllers.VentasControllers;
+
 import Models.Cajas;
 import Models.CajasDao;
 import Models.Categorias;
@@ -20,6 +22,8 @@ import Models.Config;
 import Models.ConfigDao;
 import Models.DetallePedido;
 import Models.Eventos;
+import Models.Marcas;
+import Models.MarcasDao;
 import Models.Medidas;
 import Models.MedidasDao;
 
@@ -78,6 +82,8 @@ public class PanelAdmin extends javax.swing.JFrame {
     ClientesDao clDao = new ClientesDao();
     Categorias cat = new Categorias();
     CategoriasDao catDao = new CategoriasDao();
+    Marcas marc = new Marcas();
+    MarcasDao marcDao = new MarcasDao();
     Proveedor prov = new Proveedor();
     ProveedorDao provDao = new ProveedorDao();
     Cajas ca = new Cajas();
@@ -114,6 +120,7 @@ public class PanelAdmin extends javax.swing.JFrame {
             JLabelTotalVentas.setVisible(true);
             JLabelVentas.setVisible(false);
             JLabelCat.setVisible(false);
+            JLabelMarcas.setVisible(false);
             JMenuEliminarPro.setVisible(false);
             JMenuReingresarPro.setVisible(false);
             JMenuEliminarProv.setVisible(false);
@@ -122,6 +129,8 @@ public class PanelAdmin extends javax.swing.JFrame {
             JMenuReingresarMed.setVisible(false);
             JMenuEliminarCat.setVisible(false);
             JMenuReingresarCat.setVisible(false);
+            jMenuEliminarMarcas.setVisible(false);
+            jMenuReingresarMarcas.setVisible(false);
             
         }  else if (us.getRol().equals("CAJERO")) {
         // Configuración específica para el rol "CAJERO"
@@ -166,6 +175,8 @@ public class PanelAdmin extends javax.swing.JFrame {
         UsuariosControllers users = new UsuariosControllers(us, usDao, this);
         ConfigControllers conf = new ConfigControllers(con, conDao, this);
         VentasControllers vent = new VentasControllers(v, vDao, this);
+        MarcasControllers marcass = new MarcasControllers(marc, marcDao, this);
+       
         this.setLocationRelativeTo(null);
     }
     @SuppressWarnings("unchecked")
@@ -196,6 +207,9 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPopupProductos = new javax.swing.JPopupMenu();
         jMenuEliminarProductos = new javax.swing.JMenuItem();
         jMenuReingresarProductos = new javax.swing.JMenuItem();
+        jPopupMarcas = new javax.swing.JPopupMenu();
+        jMenuEliminarMarcas = new javax.swing.JMenuItem();
+        jMenuReingresarMarcas = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         MenuCompras = new javax.swing.JPanel();
         JLabelCompras = new javax.swing.JLabel();
@@ -212,13 +226,15 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuCat = new javax.swing.JPanel();
         JLabelCat = new javax.swing.JLabel();
         MenuConfig = new javax.swing.JPanel();
-        JLabelConfig = new javax.swing.JLabel();
         labelLogo = new javax.swing.JLabel();
         btnPlatos = new javax.swing.JButton();
         btnSala = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         MenuVentas = new javax.swing.JPanel();
         JLabelVentas = new javax.swing.JLabel();
+        MenuMarcas = new javax.swing.JPanel();
+        JLabelMarcas = new javax.swing.JLabel();
+        JLabelConfig = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtBuscarPro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -293,11 +309,13 @@ public class PanelAdmin extends javax.swing.JFrame {
         txtIdPro = new javax.swing.JTextField();
         cbxProveedor = new javax.swing.JComboBox<>();
         cbxMedida = new javax.swing.JComboBox<>();
+        cbxMarc = new javax.swing.JComboBox<>();
+        jLabel97 = new javax.swing.JLabel();
         cbxCat = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TableProductos = new javax.swing.JTable();
         JPaginarPro = new javax.swing.JPanel();
         jLabel71 = new javax.swing.JLabel();
+        jScrollPane25 = new javax.swing.JScrollPane();
+        TableProductos2 = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -568,6 +586,20 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPanel34 = new javax.swing.JPanel();
         jScrollPane15 = new javax.swing.JScrollPane();
         PanelSalas = new javax.swing.JPanel();
+        jPanel41 = new javax.swing.JPanel();
+        jPanel42 = new javax.swing.JPanel();
+        jLabel94 = new javax.swing.JLabel();
+        txtNombreMarc = new javax.swing.JTextField();
+        btnGuardarMarc = new javax.swing.JButton();
+        btnModificarMarc = new javax.swing.JButton();
+        btnNuevoMarc = new javax.swing.JButton();
+        txtBuscarMarc = new javax.swing.JTextField();
+        jLabel95 = new javax.swing.JLabel();
+        txtIdMarc = new javax.swing.JTextField();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        TableMarc = new javax.swing.JTable();
+        JPaginarMarc = new javax.swing.JPanel();
+        jLabel96 = new javax.swing.JLabel();
         LabelVendedor = new javax.swing.JLabel();
 
         JMenuEliminarMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/eliminar.png"))); // NOI18N
@@ -640,6 +672,14 @@ public class PanelAdmin extends javax.swing.JFrame {
         });
         jPopupProductos.add(jMenuReingresarProductos);
 
+        jMenuEliminarMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/eliminar.png"))); // NOI18N
+        jMenuEliminarMarcas.setText("Eliminar");
+        jPopupMarcas.add(jMenuEliminarMarcas);
+
+        jMenuReingresarMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/flecha-de-carga.png"))); // NOI18N
+        jMenuReingresarMarcas.setText("Reingresar");
+        jPopupMarcas.add(jMenuReingresarMarcas);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de venta");
         setUndecorated(true);
@@ -673,7 +713,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuComprasLayout.setHorizontalGroup(
             MenuComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuComprasLayout.createSequentialGroup()
-                .addComponent(JLabelCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addComponent(JLabelCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addContainerGap())
         );
         MenuComprasLayout.setVerticalGroup(
@@ -706,7 +746,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuProductosLayout.setHorizontalGroup(
             MenuProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuProductosLayout.createSequentialGroup()
-                .addComponent(JLabelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JLabelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addContainerGap())
         );
         MenuProductosLayout.setVerticalGroup(
@@ -739,7 +779,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuClientesLayout.setHorizontalGroup(
             MenuClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuClientesLayout.createSequentialGroup()
-                .addComponent(JLabelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JLabelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addContainerGap())
         );
         MenuClientesLayout.setVerticalGroup(
@@ -772,7 +812,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuUsuariosLayout.setHorizontalGroup(
             MenuUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuUsuariosLayout.createSequentialGroup()
-                .addComponent(JLabelUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JLabelUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addContainerGap())
         );
         MenuUsuariosLayout.setVerticalGroup(
@@ -807,7 +847,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuProv.setLayout(MenuProvLayout);
         MenuProvLayout.setHorizontalGroup(
             MenuProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JLabelProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(JLabelProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
         );
         MenuProvLayout.setVerticalGroup(
             MenuProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -843,7 +883,7 @@ public class PanelAdmin extends javax.swing.JFrame {
             MenuMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuMedidasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(JLabelMedidas, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(JLabelMedidas, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         MenuMedidasLayout.setVerticalGroup(
             MenuMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -884,35 +924,15 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuConfig.setBackground(new java.awt.Color(14, 76, 117));
         MenuConfig.setFocusTraversalPolicyProvider(true);
 
-        JLabelConfig.setBackground(new java.awt.Color(255, 255, 255));
-        JLabelConfig.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        JLabelConfig.setForeground(new java.awt.Color(255, 255, 255));
-        JLabelConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/ajustes-deslizadores.png"))); // NOI18N
-        JLabelConfig.setText("Configuración");
-        JLabelConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        JLabelConfig.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        JLabelConfig.setIconTextGap(40);
-        JLabelConfig.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                JLabelConfigMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                JLabelConfigMouseExited(evt);
-            }
-        });
-
         javax.swing.GroupLayout MenuConfigLayout = new javax.swing.GroupLayout(MenuConfig);
         MenuConfig.setLayout(MenuConfigLayout);
         MenuConfigLayout.setHorizontalGroup(
             MenuConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuConfigLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JLabelConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 185, Short.MAX_VALUE)
         );
         MenuConfigLayout.setVerticalGroup(
             MenuConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JLabelConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addGap(0, 49, Short.MAX_VALUE)
         );
 
         labelLogo.setBackground(new java.awt.Color(255, 153, 0));
@@ -1024,7 +1044,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuVentasLayout.setHorizontalGroup(
             MenuVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuVentasLayout.createSequentialGroup()
-                .addComponent(JLabelVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JLabelVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addContainerGap())
         );
         MenuVentasLayout.setVerticalGroup(
@@ -1032,53 +1052,105 @@ public class PanelAdmin extends javax.swing.JFrame {
             .addComponent(JLabelVentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
 
+        MenuMarcas.setBackground(new java.awt.Color(14, 76, 117));
+        MenuMarcas.setFocusTraversalPolicyProvider(true);
+
+        JLabelMarcas.setBackground(new java.awt.Color(255, 255, 255));
+        JLabelMarcas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        JLabelMarcas.setForeground(new java.awt.Color(255, 255, 255));
+        JLabelMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/marca (2).png"))); // NOI18N
+        JLabelMarcas.setText("Marcas");
+        JLabelMarcas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JLabelMarcas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        JLabelMarcas.setIconTextGap(40);
+        JLabelMarcas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JLabelMarcasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JLabelMarcasMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout MenuMarcasLayout = new javax.swing.GroupLayout(MenuMarcas);
+        MenuMarcas.setLayout(MenuMarcasLayout);
+        MenuMarcasLayout.setHorizontalGroup(
+            MenuMarcasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuMarcasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JLabelMarcas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        MenuMarcasLayout.setVerticalGroup(
+            MenuMarcasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuMarcasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JLabelMarcas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        JLabelConfig.setBackground(new java.awt.Color(255, 255, 255));
+        JLabelConfig.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        JLabelConfig.setForeground(new java.awt.Color(255, 255, 255));
+        JLabelConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/ajustes-deslizadores.png"))); // NOI18N
+        JLabelConfig.setText("Configuración");
+        JLabelConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JLabelConfig.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        JLabelConfig.setIconTextGap(40);
+        JLabelConfig.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JLabelConfigMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JLabelConfigMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(MenuConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MenuCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MenuMedidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnPlatos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSala, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(MenuMedidas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, Short.MAX_VALUE)
+                                .addComponent(MenuProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(MenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(MenuProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(MenuCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(MenuVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(70, 70, 70)
+                                    .addComponent(labelLogo))
+                                .addComponent(btnVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(MenuVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(72, 72, 72)
-                                            .addComponent(labelLogo))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(MenuProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(MenuCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(MenuConfig, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(MenuUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(MenuClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(MenuProv, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(21, 21, 21))))
+                                .addGap(2, 2, 2)
+                                .addComponent(MenuUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(MenuCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSala, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(JLabelConfig, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                .addComponent(MenuMarcas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSala, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSala, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
+                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(MenuVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MenuCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1094,12 +1166,16 @@ public class PanelAdmin extends javax.swing.JFrame {
                 .addComponent(MenuCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MenuUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MenuMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(JLabelConfig)
+                .addGap(5, 5, 5)
                 .addComponent(MenuConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                .addGap(83, 83, 83))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 220, 620));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 220, 740));
 
         jPanel2.setBackground(new java.awt.Color(14, 76, 117));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1209,6 +1285,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 50));
 
         JPanelGrafico.setBackground(new java.awt.Color(255, 255, 255));
+        JPanelGrafico.setPreferredSize(new java.awt.Dimension(1300, 789));
         JPanelGrafico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPBarra.setBackground(new java.awt.Color(255, 255, 255));
@@ -1225,10 +1302,11 @@ public class PanelAdmin extends javax.swing.JFrame {
             .addGap(0, 380, Short.MAX_VALUE)
         );
 
-        JPanelGrafico.add(JPBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 520, 380));
+        JPanelGrafico.add(JPBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 520, 380));
 
         JPTorta.setBackground(new java.awt.Color(255, 255, 255));
         JPTorta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JPTorta.setPreferredSize(new java.awt.Dimension(520, 789));
 
         javax.swing.GroupLayout JPTortaLayout = new javax.swing.GroupLayout(JPTorta);
         JPTorta.setLayout(JPTortaLayout);
@@ -1594,18 +1672,18 @@ public class PanelAdmin extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("Categoria");
-        jPanel7.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+        jLabel23.setText("Marca");
+        jPanel7.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         btnGuardarPro.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnGuardarPro.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/salvar.png"))); // NOI18N
-        jPanel7.add(btnGuardarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, -1));
+        jPanel7.add(btnGuardarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         btnModificarPro.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnModificarPro.setForeground(new java.awt.Color(255, 255, 255));
         btnModificarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/flecha-de-carga.png"))); // NOI18N
-        jPanel7.add(btnModificarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
+        jPanel7.add(btnModificarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(51, 51, 51));
@@ -1618,12 +1696,12 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPanel7.add(txtPrecioVentaPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 90, 30));
 
         btnNuevoPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/nuevo-documento.png"))); // NOI18N
-        jPanel7.add(btnNuevoPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, -1, -1));
+        jPanel7.add(btnNuevoPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, -1, -1));
 
         txtIdPro.setBackground(new java.awt.Color(255, 255, 255));
         txtIdPro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtIdPro.setBorder(null);
-        jPanel7.add(txtIdPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 80, -1));
+        jPanel7.add(txtIdPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 80, -1));
 
         cbxProveedor.setBackground(new java.awt.Color(255, 255, 255));
         cbxProveedor.setEditable(true);
@@ -1637,48 +1715,53 @@ public class PanelAdmin extends javax.swing.JFrame {
         cbxMedida.setBorder(null);
         jPanel7.add(cbxMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 200, 30));
 
+        cbxMarc.setBackground(new java.awt.Color(255, 255, 255));
+        cbxMarc.setEditable(true);
+        cbxMarc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbxMarc.setBorder(null);
+        jPanel7.add(cbxMarc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 200, 30));
+
+        jLabel97.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel97.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel97.setText("Categoria");
+        jPanel7.add(jLabel97, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+
         cbxCat.setBackground(new java.awt.Color(255, 255, 255));
         cbxCat.setEditable(true);
         cbxCat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbxCat.setBorder(null);
         jPanel7.add(cbxCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 200, 30));
 
-        jPanel16.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 250, 490));
+        jPanel16.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 250, 580));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+        JPaginarPro.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel16.add(JPaginarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, 790, 40));
 
-        TableProductos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        TableProductos.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel71.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel71.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel71.setText("> Productos");
+        jPanel16.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
+
+        TableProductos2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Producto", "Precio", "Cant", "Medida", "Estado"
+                "Id", "Producto", "Precio", "Cantidad", "Medida", "Marca", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        TableProductos.setComponentPopupMenu(jPopupProductos);
-        TableProductos.setRowHeight(25);
-        jScrollPane1.setViewportView(TableProductos);
+        TableProductos2.setComponentPopupMenu(jPopupProductos);
+        jScrollPane25.setViewportView(TableProductos2);
 
-        jPanel16.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 790, 430));
-
-        JPaginarPro.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.add(JPaginarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, 790, 50));
-
-        jLabel71.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel71.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel71.setText("> Productos");
-        jPanel16.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jPanel16.add(jScrollPane25, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 770, 460));
 
         jTabbedPane1.addTab("tab2", jPanel16);
 
@@ -2709,7 +2792,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         jPanel118.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 40, 30));
@@ -2725,7 +2808,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         jPanel118.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 40, 30));
@@ -2760,7 +2843,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         );
         jPanel37Layout.setVerticalGroup(
             jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         jPanel118.add(jPanel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 40, 30));
@@ -2791,7 +2874,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         );
         jPanel40Layout.setVerticalGroup(
             jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         jPanel118.add(jPanel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 40, 30));
@@ -2981,6 +3064,11 @@ public class PanelAdmin extends javax.swing.JFrame {
         jPanel47.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Platos del Dia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         txtBuscarPlato.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtBuscarPlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarPlatoActionPerformed(evt);
+            }
+        });
         txtBuscarPlato.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarPlatoKeyReleased(evt);
@@ -3513,6 +3601,113 @@ public class PanelAdmin extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Panel", jPanel34);
+
+        jPanel41.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel42.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel42.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nuevo Marca", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 51))); // NOI18N
+        jPanel42.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel94.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel94.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel94.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel94.setText("Nombre");
+        jPanel42.add(jLabel94, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+
+        txtNombreMarc.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombreMarc.setBorder(null);
+        jPanel42.add(txtNombreMarc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 200, 30));
+
+        btnGuardarMarc.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnGuardarMarc.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarMarc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/salvar.png"))); // NOI18N
+        jPanel42.add(btnGuardarMarc, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 40));
+
+        btnModificarMarc.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnModificarMarc.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificarMarc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/flecha-de-carga.png"))); // NOI18N
+        jPanel42.add(btnModificarMarc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, 40));
+
+        btnNuevoMarc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/nuevo-documento.png"))); // NOI18N
+        jPanel42.add(btnNuevoMarc, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, 40));
+
+        txtBuscarMarc.setBackground(new java.awt.Color(255, 255, 255));
+        txtBuscarMarc.setBorder(null);
+        jPanel42.add(txtBuscarMarc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 200, 30));
+
+        jLabel95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/busqueda (1).png"))); // NOI18N
+        jPanel42.add(jLabel95, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 50, 40));
+
+        txtIdMarc.setBackground(new java.awt.Color(255, 255, 255));
+        txtIdMarc.setBorder(null);
+        jPanel42.add(txtIdMarc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 90, -1));
+
+        jScrollPane16.setBorder(null);
+        jScrollPane16.setForeground(new java.awt.Color(255, 255, 255));
+
+        TableMarc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        TableMarc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableMarc.setComponentPopupMenu(jPopupMarcas);
+        TableMarc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        TableMarc.setRowHeight(25);
+        jScrollPane16.setViewportView(TableMarc);
+
+        JPaginarMarc.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel96.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel96.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel96.setText("> Marcas");
+
+        javax.swing.GroupLayout jPanel41Layout = new javax.swing.GroupLayout(jPanel41);
+        jPanel41.setLayout(jPanel41Layout);
+        jPanel41Layout.setHorizontalGroup(
+            jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel41Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JPaginarMarc, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(137, 137, 137))
+            .addGroup(jPanel41Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel41Layout.createSequentialGroup()
+                        .addComponent(jLabel96)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel41Layout.createSequentialGroup()
+                        .addComponent(jPanel42, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
+        );
+        jPanel41Layout.setVerticalGroup(
+            jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel41Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel96)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel42, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JPaginarMarc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab22", jPanel41);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 1080, 610));
 
@@ -4074,6 +4269,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuReingresarProductosActionPerformed
 
+    
     private void JLabelClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLabelClientesMouseEntered
         Color clr = new Color (0,153,204);
         MenuClientes.setBackground(clr);
@@ -4198,6 +4394,21 @@ public class PanelAdmin extends javax.swing.JFrame {
         MenuConfig.setBackground(clr);
     }//GEN-LAST:event_JLabelConfigMouseExited
 
+    private void JLabelMarcasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLabelMarcasMouseEntered
+        Color clr = new Color (0,153,204);
+        MenuMarcas.setBackground(clr);
+       
+    }//GEN-LAST:event_JLabelMarcasMouseEntered
+
+    private void JLabelMarcasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLabelMarcasMouseExited
+        Color clr = new Color (14,76,117);
+        MenuMarcas.setBackground(clr);
+    }//GEN-LAST:event_JLabelMarcasMouseExited
+
+    private void txtBuscarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarPlatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarPlatoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4209,6 +4420,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JLabel JLabelCompra;
     public javax.swing.JLabel JLabelCompras;
     public javax.swing.JLabel JLabelConfig;
+    public javax.swing.JLabel JLabelMarcas;
     public javax.swing.JLabel JLabelMedidas;
     public javax.swing.JLabel JLabelProductos;
     public javax.swing.JLabel JLabelProveedor;
@@ -4235,6 +4447,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JPanel JPaginarCaja;
     public javax.swing.JPanel JPaginarCat;
     public javax.swing.JPanel JPaginarCli;
+    public javax.swing.JPanel JPaginarMarc;
     public javax.swing.JPanel JPaginarMedida;
     public javax.swing.JPanel JPaginarPro;
     public javax.swing.JPanel JPaginarProv;
@@ -4254,6 +4467,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JPanel MenuClientes;
     public javax.swing.JPanel MenuCompras;
     public javax.swing.JPanel MenuConfig;
+    public javax.swing.JPanel MenuMarcas;
     public javax.swing.JPanel MenuMedidas;
     public javax.swing.JPanel MenuProductos;
     public javax.swing.JPanel MenuProv;
@@ -4266,11 +4480,12 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JTable TableClientes;
     public javax.swing.JTable TableCompra;
     public javax.swing.JTable TableCompras;
+    public javax.swing.JTable TableMarc;
     public javax.swing.JTable TableMedidas;
     public javax.swing.JTable TableNuevaVenta;
     private javax.swing.JTable TablePedidos;
     private javax.swing.JTable TablePlatos;
-    public javax.swing.JTable TableProductos;
+    public javax.swing.JTable TableProductos2;
     public javax.swing.JTable TableProveedor;
     public javax.swing.JTable TableUsers;
     public javax.swing.JTable TableVentas;
@@ -4294,6 +4509,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardarCaja;
     public javax.swing.JButton btnGuardarCat;
     public javax.swing.JButton btnGuardarCli;
+    public javax.swing.JButton btnGuardarMarc;
     public javax.swing.JButton btnGuardarMed;
     private javax.swing.JButton btnGuardarPlato;
     public javax.swing.JButton btnGuardarPro;
@@ -4303,6 +4519,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JButton btnModificarCat;
     public javax.swing.JButton btnModificarCli;
     public javax.swing.JButton btnModificarEmpresa;
+    public javax.swing.JButton btnModificarMarc;
     public javax.swing.JButton btnModificarMed;
     public javax.swing.JButton btnModificarPro;
     public javax.swing.JButton btnModificarProv;
@@ -4310,6 +4527,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JButton btnNuevoCaja;
     public javax.swing.JButton btnNuevoCat;
     public javax.swing.JButton btnNuevoCli;
+    public javax.swing.JButton btnNuevoMarc;
     public javax.swing.JButton btnNuevoMed;
     private javax.swing.JButton btnNuevoPlato;
     public javax.swing.JButton btnNuevoPro;
@@ -4325,6 +4543,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnVentas;
     public javax.swing.JComboBox<String> cbxCajaUser;
     public javax.swing.JComboBox<String> cbxCat;
+    public javax.swing.JComboBox<String> cbxMarc;
     public javax.swing.JComboBox<String> cbxMedida;
     public javax.swing.JComboBox<String> cbxProveedor;
     public javax.swing.JComboBox<String> cbxRolUser;
@@ -4422,7 +4641,13 @@ public class PanelAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    public javax.swing.JMenuItem jMenuEliminarMarcas;
     public javax.swing.JMenuItem jMenuEliminarProductos;
+    public javax.swing.JMenuItem jMenuReingresarMarcas;
     public javax.swing.JMenuItem jMenuReingresarProductos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -4460,6 +4685,8 @@ public class PanelAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel40;
+    private javax.swing.JPanel jPanel41;
+    private javax.swing.JPanel jPanel42;
     private javax.swing.JPanel jPanel43;
     private javax.swing.JPanel jPanel44;
     private javax.swing.JPanel jPanel45;
@@ -4475,15 +4702,16 @@ public class PanelAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    public javax.swing.JPopupMenu jPopupMarcas;
     public javax.swing.JPopupMenu jPopupProductos;
     private javax.swing.JPopupMenu jPopupUsuarios;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane19;
@@ -4493,6 +4721,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JScrollPane jScrollPane23;
     private javax.swing.JScrollPane jScrollPane24;
+    private javax.swing.JScrollPane jScrollPane25;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -4514,6 +4743,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JTextField txtBuscarCaja;
     public javax.swing.JTextField txtBuscarCat;
     public javax.swing.JTextField txtBuscarCli;
+    public javax.swing.JTextField txtBuscarMarc;
     public javax.swing.JTextField txtBuscarMed;
     private javax.swing.JTextField txtBuscarPlato;
     public javax.swing.JTextField txtBuscarPro;
@@ -4543,6 +4773,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JTextField txtIdConfig;
     private javax.swing.JTextField txtIdHistorialPedido;
     public javax.swing.JTextField txtIdLogin;
+    public javax.swing.JTextField txtIdMarc;
     public javax.swing.JTextField txtIdMed;
     public javax.swing.JTextField txtIdNV;
     private javax.swing.JTextField txtIdPedido;
@@ -4559,6 +4790,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JTextField txtNombreCli;
     public javax.swing.JTextField txtNombreCortoMed;
     public javax.swing.JTextField txtNombreEmpresa;
+    public javax.swing.JTextField txtNombreMarc;
     public javax.swing.JTextField txtNombreMed;
     private javax.swing.JTextField txtNombrePlato;
     public javax.swing.JTextField txtNombrePro;
@@ -4601,5 +4833,6 @@ public class PanelAdmin extends javax.swing.JFrame {
     public javax.swing.JTextField txtVentasUsuario;
     public javax.swing.JTextField txtVuelto;
     // End of variables declaration//GEN-END:variables
+
 
 }

@@ -45,9 +45,10 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
         this.views.btnGuardarPro.addActionListener(this);
         this.views.btnNuevoPro.addActionListener(this);
         this.views.btnModificarPro.addActionListener(this);
-        this.views.TableProductos.addMouseListener(this);
+        this.views.TableProductos2.addMouseListener(this);
         this.views.cbxProveedor.addKeyListener(this);
         this.views.cbxMedida.addKeyListener(this);
+        this.views.cbxMarc.addKeyListener(this);
         this.views.cbxCat.addKeyListener(this);
         this.views.JLabelProductos.addMouseListener(this);
         this.views.JLabelCompras.addMouseListener(this);
@@ -70,7 +71,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
         this.views.btnPdfV.addActionListener(this);
         this.views.btnPdfC.addActionListener(this);
 
-        this.views.TableProductos.getModel().addTableModelListener(this);
+        this.views.TableProductos2.getModel().addTableModelListener(this);
         this.views.txtPagarCon.addKeyListener(this);
     }
 
@@ -83,7 +84,8 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                     || views.txtPrecioVentaPro.getText().equals("")
                     || views.cbxProveedor.getSelectedItem().equals("")
                     || views.cbxMedida.getSelectedItem().equals("")
-                    || views.cbxCat.getSelectedItem().equals("")) {
+                    || views.cbxCat.getSelectedItem().equals("")
+                    || views.cbxMarc.getSelectedItem().equals("")) {
                 //JOptionPane.showMessageDialog(null, "Todo los campos son obligatorios");
                 FrmLogin l = new FrmLogin();
                 l.advertencia("Todos los campos son obligatorios");
@@ -95,6 +97,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                 pro.setProveedor(views.cbxProveedor.getSelectedItem().toString());
                 pro.setMedida(views.cbxMedida.getSelectedItem().toString());
                 pro.setCategoria(views.cbxCat.getSelectedItem().toString());
+                pro.setMarca(views.cbxMarc.getSelectedItem().toString());
                 if (proDao.registrar(pro)) {
                     Nuevo();
                     Listar();
@@ -114,7 +117,8 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                     || views.txtPrecioVentaPro.getText().equals("")
                     || views.cbxProveedor.getSelectedItem().equals("")
                     || views.cbxMedida.getSelectedItem().equals("")
-                    || views.cbxCat.getSelectedItem().equals("")) {
+                    || views.cbxCat.getSelectedItem().equals("")
+                    || views.cbxMarc.getSelectedItem().equals("")) {
                 //JOptionPane.showMessageDialog(null, "Todo los campos son obligatorios");
                 FrmLogin l = new FrmLogin();
               l.advertencia("Todos los campos son obligatorios");
@@ -126,6 +130,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
                 pro.setProveedor(views.cbxProveedor.getSelectedItem().toString());
                 pro.setMedida(views.cbxMedida.getSelectedItem().toString());
                 pro.setCategoria(views.cbxCat.getSelectedItem().toString());
+                pro.setMarca(views.cbxMarc.getSelectedItem().toString());
                 pro.setId(Integer.parseInt(views.txtIdPro.getText()));
                 if (proDao.modificar(pro)) {
                     Nuevo();
@@ -240,10 +245,10 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource() == views.TableProductos) {
-            int fila = views.TableProductos.rowAtPoint(e.getPoint());
-            views.txtIdPro.setText(views.TableProductos.getValueAt(fila, 0).toString());
-            String estado = views.TableProductos.getValueAt(fila, 5).toString();
+        if (e.getSource() == views.TableProductos2) {
+            int fila = views.TableProductos2.rowAtPoint(e.getPoint());
+            views.txtIdPro.setText(views.TableProductos2.getValueAt(fila, 0).toString());
+            String estado = views.TableProductos2.getValueAt(fila, 5).toString();
             if (estado.equals("Inactivo")){
                 views.JMenuEliminarPro.setVisible(false);
                 views.JMenuReingresarPro.setVisible(true);
@@ -258,6 +263,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
             views.txtPrecioVentaPro.setText("" + pro.getPrecio_venta());
             views.cbxMedida.setSelectedItem(pro.getMedida());
             views.cbxCat.setSelectedItem(pro.getCategoria());
+            views.cbxMarc.setSelectedItem(pro.getMarca());
             views.cbxProveedor.setSelectedItem(pro.getProveedor());
         } else if (e.getSource() == views.JLabelProductos) {
             views.jTabbedPane1.setSelectedIndex(2);
@@ -266,9 +272,11 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
             views.cbxProveedor.removeAllItems();
             views.cbxMedida.removeAllItems();
             views.cbxCat.removeAllItems();
+            views.cbxMarc.removeAllItems();
             proDao.llenarCombo(views.cbxProveedor, "proveedor");
             proDao.llenarCombo(views.cbxMedida, "medidas");
             proDao.llenarCombo(views.cbxCat, "categorias");
+            proDao.llenarCombo(views.cbxMarc, "marcas");
             Listar();
         } else if (e.getSource() == views.JLabelCompras) {
             views.jTabbedPane1.setSelectedIndex(6);
@@ -310,6 +318,7 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
         views.txtPrecioVentaPro.setText("");
         views.cbxMedida.setSelectedItem("");
         views.cbxCat.setSelectedItem("");
+        views.cbxMarc.setSelectedItem("");
         views.cbxProveedor.setSelectedItem("");
     }
 
@@ -604,19 +613,19 @@ public class ProductosControllers implements ActionListener, MouseListener, KeyL
     //paginador
     private void Listar() {
         Tables color = new Tables();
-        views.TableProductos.setDefaultRenderer(views.TableProductos.getColumnClass(0), color);
-        JTableHeader header = views.TableProductos.getTableHeader();
+        views.TableProductos2.setDefaultRenderer(views.TableProductos2.getColumnClass(0), color);
+        JTableHeader header = views.TableProductos2.getTableHeader();
         header.setOpaque(false);
         header.setBackground(Color.BLUE);
         header.setForeground(Color.white);
         views.JPaginarPro.removeAll();
-        views.TableProductos.setModel(ModeloTable());
+        views.TableProductos2.setModel(ModeloTable());
         TotalRows<Productos> proL = ListarProductos();
-        paginado = new PaginadoTable(views.TableProductos, proL, new int[]{20, 50, 100, 200}, 20);
+        paginado = new PaginadoTable(views.TableProductos2, proL, new int[]{20, 50, 100, 200}, 20);
         paginado.crearPermitidas(views.JPaginarPro);
         cbxFilasPermitidas = paginado.getCbxFilasPermitidas();
         cbxFilasPermitidas.addActionListener(this);
-        views.TableProductos.getModel().addTableModelListener(this);
+        views.TableProductos2.getModel().addTableModelListener(this);
         cbxFilasPermitidas.setSelectedItem(Integer.parseInt("20"));
     }
 

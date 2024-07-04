@@ -11,11 +11,12 @@ public class Productos {
     private String medida;
     private String categoria;
     private String estado;
+    private String marca; 
 
     public Productos() {
     }
 
-    public Productos(int id, String codigo, String nombre, String proveedor, double precio_compra, double precio_venta, int cantidad, String medida, String categoria, String estado) {
+    public Productos(int id, String codigo, String nombre, String proveedor, double precio_compra, double precio_venta, int cantidad, String medida, String categoria, String estado, String marca) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -26,6 +27,7 @@ public class Productos {
         this.medida = medida;
         this.categoria = categoria;
         this.estado = estado;
+        this.marca = marca;
     }
 
     public int getId() {
@@ -107,6 +109,14 @@ public class Productos {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-       
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
 
 }
