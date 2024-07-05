@@ -8,7 +8,7 @@ public class Conexion {
     Connection con;
     public Connection getConnection() {
         try {
-            String db = "jdbc:mysql://localhost:3306/vadoprueba";
+            String db = "jdbc:mysql://localhost:3306/postprueba";
             con = DriverManager.getConnection(db, "root", "");
             return con;
         } catch (SQLException e) {

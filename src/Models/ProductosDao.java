@@ -7,9 +7,11 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -327,151 +329,174 @@ public class ProductosDao {
     }
 
       public void pdfV(int idventa, String Cliente, String total, String usuario) {
-        try {
-            Date date = new Date();
-            FileOutputStream archivo;
-            String url = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
-            File salida = new File(url + "/venta.pdf");
-            archivo = new FileOutputStream(salida);
-            Document doc = new Document();
-            PdfWriter.getInstance(doc, archivo);
-            doc.open();
-            Image img = Image.getInstance(getClass().getResource("/Assets/titulo.png"));
-            //Fecha
-            Paragraph fecha = new Paragraph();
-            Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
-            fecha.add(Chunk.NEWLINE);
-            fecha.add("Vendedor: " + usuario + "\nNúmero: F001- " + idventa + "\nFecha: "
-                    + new SimpleDateFormat("dd/MM/yyyy").format(date) + "\n\n");
-            PdfPTable Encabezado = new PdfPTable(4);
-            Encabezado.setWidthPercentage(100);
-            Encabezado.getDefaultCell().setBorder(0);
-            float[] columnWidthsEncabezado = new float[]{20f, 30f, 70f, 40f};
-            Encabezado.setWidths(columnWidthsEncabezado);
-            Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
-            Encabezado.addCell(img);
-            Encabezado.addCell("");
-            //info empresa
-            String config = "SELECT * FROM configuracion";
-            String mensaje = "";
-            try {
-                con = cn.getConnection();
-                ps = con.prepareStatement(config);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    mensaje = rs.getString("mensaje");
-                    Encabezado.addCell("Ruc:    " + rs.getString("ruc") + "\nNombre: " + rs.getString("nombre") + "\nTeléfono: " + rs.getString("telefono") + "\nDirección: " + rs.getString("direccion") + "\n\n");
+    try {
+        Date date = new Date();
+        FileOutputStream archivo;
+        String url = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
+        File salida = new File(url + "/venta.pdf");
+        archivo = new FileOutputStream(salida);
+        Document doc = new Document(PageSize.A4); // Tamaño A4
+        PdfWriter.getInstance(doc, archivo);
+        doc.open();
+
+        // Fuente consistente para todo el documento
+        Font fuente = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL, BaseColor.BLACK);
+        Font fuenteNegrita = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);
+
+        // Agregar logo
+        Image img = Image.getInstance(getClass().getResource("/Assets/titulo.png"));
+        img.scaleToFit(50, 50); // Ajustar el tamaño del logo
+        img.setAlignment(Element.ALIGN_LEFT);
+        doc.add(img);
+
+        // Encabezado de la empresa
+        Paragraph empresa = new Paragraph("Vado\nRECREO TURÍSTICO \"EL VADO\"\nJR MANCO CAPAC #690 - MORALES\nTel: 968494861\nEmail: vado@gmail.com\nWeb: www.vado.com", fuenteNegrita);
+        empresa.setAlignment(Element.ALIGN_CENTER);
+        doc.add(empresa);
+
+        // Obtener y actualizar el número de boleta
+        String numeroBoleta = "B001-0001"; // Este es el número inicial, debe ser recuperado de una fuente persistente y actualizado
+        String boletaConfig = "SELECT numero_boleta FROM configuracion";
+        String updateBoletaConfig = "UPDATE configuracion SET numero_boleta = ?";
+        try (Connection con = cn.getConnection();
+             PreparedStatement ps = con.prepareStatement(boletaConfig);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                numeroBoleta = rs.getString("numero_boleta");
+                int numBoleta = Integer.parseInt(numeroBoleta.split("-")[1]) + 1;
+                numeroBoleta = "B001-" + String.format("%04d", numBoleta);
+
+                // Actualizar el número de boleta en la base de datos
+                try (PreparedStatement psUpdate = con.prepareStatement(updateBoletaConfig)) {
+                    psUpdate.setString(1, numeroBoleta);
+                    psUpdate.executeUpdate();
                 }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
             }
-            //
-            Encabezado.addCell(fecha);
-            doc.add(Encabezado);
-            //cliente
-            Paragraph cli = new Paragraph();
-            cli.add(Chunk.NEWLINE);
-            cli.add("DATOS DEL CLIENTE" + "\n\n");
-            doc.add(cli);
-
-            PdfPTable proveedor = new PdfPTable(3);
-            proveedor.setWidthPercentage(100);
-            proveedor.getDefaultCell().setBorder(0);
-            float[] columnWidthsCliente = new float[]{50f, 25f, 25f};
-            proveedor.setWidths(columnWidthsCliente);
-            proveedor.setHorizontalAlignment(Element.ALIGN_LEFT);
-            PdfPCell cliNom = new PdfPCell(new Phrase("Nombre", negrita));
-            PdfPCell cliTel = new PdfPCell(new Phrase("Télefono", negrita));
-            PdfPCell cliDir = new PdfPCell(new Phrase("Dirección", negrita));
-            cliNom.setBorder(Rectangle.NO_BORDER);
-            cliTel.setBorder(Rectangle.NO_BORDER);
-            cliDir.setBorder(Rectangle.NO_BORDER);
-            proveedor.addCell(cliNom);
-            proveedor.addCell(cliTel);
-            proveedor.addCell(cliDir);
-            String prove = "SELECT * FROM clientes WHERE nombre = ?";
-            try {
-                ps = con.prepareStatement(prove);
-                ps.setString(1, Cliente);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    proveedor.addCell(rs.getString("nombre"));
-                    proveedor.addCell(rs.getString("telefono"));
-                    proveedor.addCell(rs.getString("direccion") + "\n\n");
-                } else {
-                    proveedor.addCell("Publico en General");
-                    proveedor.addCell("S/N");
-                    proveedor.addCell("S/N" + "\n\n");
-                }
-
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
-            doc.add(proveedor);
-
-            PdfPTable tabla = new PdfPTable(4);
-            tabla.setWidthPercentage(100);
-            tabla.getDefaultCell().setBorder(0);
-            float[] columnWidths = new float[]{10f, 50f, 15f, 15f};
-            tabla.setWidths(columnWidths);
-            tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
-            PdfPCell c1 = new PdfPCell(new Phrase("Cant.", negrita));
-            PdfPCell c2 = new PdfPCell(new Phrase("Descripción.", negrita));
-            PdfPCell c3 = new PdfPCell(new Phrase("P. unt.", negrita));
-            PdfPCell c4 = new PdfPCell(new Phrase("P. Total", negrita));
-            c1.setBorder(Rectangle.NO_BORDER);
-            c2.setBorder(Rectangle.NO_BORDER);
-            c3.setBorder(Rectangle.NO_BORDER);
-            c4.setBorder(Rectangle.NO_BORDER);
-            c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            c3.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            c4.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            tabla.addCell(c1);
-            tabla.addCell(c2);
-            tabla.addCell(c3);
-            tabla.addCell(c4);
-            String product = "SELECT d.id, d.id_venta, d.id_producto, d.precio, d.cantidad, p.id, p.id, p.nombre FROM detalle_venta d INNER JOIN productos p WHERE d.id_producto = p.id AND d.id_venta = ?";
-            try {
-                ps = con.prepareStatement(product);
-                ps.setInt(1, idventa);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    double subTotal = rs.getInt("cantidad") * rs.getDouble("precio");
-                    tabla.addCell(rs.getString("cantidad"));
-                    tabla.addCell(rs.getString("nombre"));
-                    tabla.addCell(rs.getString("precio"));
-                    tabla.addCell(String.valueOf(subTotal));
-                }
-
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
-            doc.add(tabla);
-            Paragraph info = new Paragraph();
-            info.add(Chunk.NEWLINE);
-            info.add("Total S/: " + total);
-            info.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(info);
-            Paragraph firma = new Paragraph();
-            firma.add(Chunk.NEWLINE);
-            firma.add("Cancelacion \n\n");
-            firma.add("------------------------------------\n");
-            firma.add("Firma \n");
-            firma.setAlignment(Element.ALIGN_CENTER);
-            doc.add(firma);
-            Paragraph gr = new Paragraph();
-            gr.add(Chunk.NEWLINE);
-            gr.add(mensaje);
-            gr.setAlignment(Element.ALIGN_CENTER);
-            doc.add(gr);
-            doc.close();
-            archivo.close();
-            Desktop.getDesktop().open(salida);
-        } catch (DocumentException | IOException e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
         }
-    } 
+
+        // Información de la boleta
+        Paragraph boletaInfo = new Paragraph("R.U.C. 20100100100\nBOLETA DE VENTA ELECTRÓNICA\nNº " + numeroBoleta, fuenteNegrita);
+        boletaInfo.setAlignment(Element.ALIGN_RIGHT);
+        doc.add(boletaInfo);
+
+        // Espacio
+        doc.add(Chunk.NEWLINE);
+
+        // Información del cliente
+        Paragraph cli = new Paragraph("Cliente: " + Cliente + "\nDirección: ...\nDNI: ...", fuente);
+        cli.setAlignment(Element.ALIGN_LEFT);
+        doc.add(cli);
+
+        // Observaciones
+        Paragraph observaciones = new Paragraph("Observaciones: ...", fuente);
+        observaciones.setAlignment(Element.ALIGN_LEFT);
+        doc.add(observaciones);
+
+        // Espacio
+        doc.add(Chunk.NEWLINE);
+
+        // Tabla de productos
+        PdfPTable tabla = new PdfPTable(7);
+        tabla.setWidthPercentage(100);
+        tabla.getDefaultCell().setBorder(Rectangle.BOX);
+        float[] columnWidths = new float[]{10f, 15f, 40f, 10f, 15f, 15f, 15f};
+        tabla.setWidths(columnWidths);
+        tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+        PdfPCell c1 = new PdfPCell(new Phrase("Cant.", fuenteNegrita));
+        PdfPCell c2 = new PdfPCell(new Phrase("U.M.", fuenteNegrita));
+        PdfPCell c3 = new PdfPCell(new Phrase("Descripción", fuenteNegrita));
+        PdfPCell c4 = new PdfPCell(new Phrase("P. Unit.", fuenteNegrita));
+        PdfPCell c5 = new PdfPCell(new Phrase("Importe", fuenteNegrita));
+        PdfPCell c6 = new PdfPCell(new Phrase("Fecha Emisión", fuenteNegrita));
+        PdfPCell c7 = new PdfPCell(new Phrase("Cond. de Pago", fuenteNegrita));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c4.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c5.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c6.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c7.setHorizontalAlignment(Element.ALIGN_CENTER);
+        tabla.addCell(c1);
+        tabla.addCell(c2);
+        tabla.addCell(c3);
+        tabla.addCell(c4);
+        tabla.addCell(c5);
+        tabla.addCell(c6);
+        tabla.addCell(c7);
+
+        // Añadir productos
+        String product = "SELECT d.cantidad, p.nombre, d.precio FROM detalle_venta d INNER JOIN productos p ON d.id_producto = p.id WHERE d.id_venta = ?";
+        try {
+            Connection con = cn.getConnection();
+            PreparedStatement ps = con.prepareStatement(product);
+            ps.setInt(1, idventa);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                double subTotal = rs.getInt("cantidad") * rs.getDouble("precio");
+                tabla.addCell(new Phrase(rs.getString("cantidad"), fuente));
+                tabla.addCell(new Phrase("UND", fuente));
+                tabla.addCell(new Phrase(rs.getString("nombre"), fuente));
+                tabla.addCell(new Phrase(String.format("%.2f", rs.getDouble("precio")), fuente));
+                tabla.addCell(new Phrase(String.format("%.2f", subTotal), fuente));
+                tabla.addCell(new Phrase(new SimpleDateFormat("dd/MM/yyyy").format(date), fuente));
+                tabla.addCell(new Phrase("Contado", fuente));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        doc.add(tabla);
+        
+        // Espacio
+        doc.add(Chunk.NEWLINE);
+
+        // Total
+        PdfPTable totales = new PdfPTable(2);
+        totales.setWidthPercentage(100);
+        totales.setWidths(new float[]{80f, 20f});
+        totales.addCell(new Phrase("Importe Total (S/)", fuenteNegrita));
+        totales.addCell(new Phrase(total, fuente));
+        doc.add(totales);
+        
+        // Espacio
+        doc.add(Chunk.NEWLINE);
+        
+        double totalAmount = Double.parseDouble(total);
+        Paragraph info = new Paragraph("SON: " + convertirNumeroALetras(totalAmount) + "\n\n", fuente);
+        info.setAlignment(Element.ALIGN_LEFT);
+        doc.add(info);
+
+        // Espacio
+        doc.add(Chunk.NEWLINE);
+
+        // Código QR
+        BarcodeQRCode qrCode = new BarcodeQRCode("https://www.facturas.net", 100, 100, null);
+        Image qrImage = qrCode.getImage();
+        qrImage.scaleAbsolute(50, 50);
+        qrImage.setAlignment(Element.ALIGN_LEFT);
+        doc.add(qrImage);
+
+        // Mensaje final
+        Paragraph mensajeFinal = new Paragraph("Representación impresa de BOLETA DE VENTA ELECTRÓNICA\nAutorizado por Resolución 0340050007241/SUNAT", fuenteNegrita);
+        mensajeFinal.setAlignment(Element.ALIGN_CENTER);
+        doc.add(mensajeFinal);
+
+        doc.close();
+        archivo.close();
+        Desktop.getDesktop().open(salida);
+    } catch (DocumentException | IOException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
+
+// Método para convertir el monto total en letras
+private String convertirNumeroALetras(double total) {
+    int parteEntera = (int) total;
+    int parteDecimal = (int) Math.round((total - parteEntera) * 100);
+    return NumeroALetras.convertNumberToLetter(parteEntera) + " CON " + String.format("%02d", parteDecimal) + "/100 SOLES";
+}
     
     /* public void pdfV(int idventa, String Cliente, String total, String usuario) {
     Document doc = null;
@@ -630,212 +655,229 @@ public class ProductosDao {
 } */
 
       public void pdfC(int idcompra, String proveedor, String total) {
-        try {
-            Date date = new Date();
-            String url = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
-            File salida = new File(url + "/boleta.pdf");
-            FileOutputStream archivo = new FileOutputStream(salida);
-            Document doc = new Document(new Rectangle(80 * 2.835f, 297 * 2.835f)); // 80mm x 297mm
-            PdfWriter.getInstance(doc, archivo);
-            doc.open();
+    try {
+        Date date = new Date();
+        String url = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
+        File salida = new File(url + "/boleta.pdf");
+        FileOutputStream archivo = new FileOutputStream(salida);
+        Document doc = new Document(new Rectangle(80 * 2.835f, 297 * 2.835f)); // 80mm x 297mm
+        PdfWriter.getInstance(doc, archivo);
+        doc.open();
 
-            // Fuente consistente para todo el documento
-            Font fuente = new Font(Font.FontFamily.TIMES_ROMAN, 6, Font.NORMAL, BaseColor.BLACK);
-            Font fuenteNegrita = new Font(Font.FontFamily.TIMES_ROMAN, 6, Font.BOLD, BaseColor.BLUE);
+        // Fuente consistente para todo el documento
+        Font fuente = new Font(Font.FontFamily.TIMES_ROMAN, 6, Font.NORMAL, BaseColor.BLACK);
+        Font fuenteNegrita = new Font(Font.FontFamily.TIMES_ROMAN, 6, Font.BOLD, BaseColor.BLUE);
 
-            // Agregar logo
-            Image img = Image.getInstance(getClass().getResource("/Assets/titulo.png"));
-            img.scaleToFit(40, 40); // Ajustar el tamaño del logo para que se ajuste al ancho
-            img.setAlignment(Element.ALIGN_LEFT);
-            doc.add(img);
+        // Agregar logo
+        Image img = Image.getInstance(getClass().getResource("/Assets/titulo.png"));
+        img.scaleToFit(40, 40); // Ajustar el tamaño del logo para que se ajuste al ancho
+        img.setAlignment(Element.ALIGN_LEFT);
+        doc.add(img);
 
-            // Información fija de la empresa
-            String nombreEmpresa = "";
-            String ruc = "";
-            String direccion = "";
-            String telefono = "";
-            String email = "";
+        // Información fija de la empresa
+        String nombreEmpresa = "";
+        String ruc = "";
+        String direccion = "";
+        String telefono = "";
+        String email = "";
 
-            // Información de la empresa desde la base de datos
-            String config = "SELECT * FROM configuracion";
-            String mensaje = "";
-            try (Connection con = cn.getConnection();
-                 PreparedStatement ps = con.prepareStatement(config);
-                 ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    nombreEmpresa = rs.getString("nombre");
-                    ruc = rs.getString("ruc");
-                    direccion = rs.getString("direccion");
-                    telefono = rs.getString("telefono");
-                    email = rs.getString("email");
-                    mensaje = rs.getString("mensaje");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+        // Información de la empresa desde la base de datos
+        String config = "SELECT * FROM configuracion";
+        String mensaje = "";
+        try (Connection con = cn.getConnection();
+             PreparedStatement ps = con.prepareStatement(config);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                nombreEmpresa = rs.getString("nombre");
+                ruc = rs.getString("ruc");
+                direccion = rs.getString("direccion");
+                telefono = rs.getString("telefono");
+                email = rs.getString("email");
+                mensaje = rs.getString("mensaje");
             }
-
-            Paragraph empresaInfoFija = new Paragraph(
-                nombreEmpresa + "\n" +
-                "RUC: " + ruc + "\n" +
-                direccion + "\n" +
-                "Teléfono: " + telefono + "\n" +
-                "Email: " + email + "\n\n" +
-                "BOLETA DE VENTA ELECTRÓNICA\n Número: B001-001\n\n", 
-                fuenteNegrita
-            );
-            empresaInfoFija.setAlignment(Element.ALIGN_CENTER);
-            doc.add(empresaInfoFija);
-
-            // Fecha y folio
-            Paragraph fecha = new Paragraph("Fecha y hora: " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date) + "\n\n", fuente);
-            fecha.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(fecha);
-
-            // Información del proveedor
-            PdfPTable prov = new PdfPTable(3);
-            prov.setWidthPercentage(100);
-            prov.getDefaultCell().setBorder(0);
-            float[] columnWidthsCliente = new float[]{50f, 25f, 25f};
-            prov.setWidths(columnWidthsCliente);
-            prov.setHorizontalAlignment(Element.ALIGN_LEFT);
-
-            PdfPCell cliNom = new PdfPCell(new Phrase("Nombre", fuenteNegrita));
-            PdfPCell cliTel = new PdfPCell(new Phrase("Teléfono", fuenteNegrita));
-            PdfPCell cliDir = new PdfPCell(new Phrase("Dirección", fuenteNegrita));
-            cliNom.setBorder(Rectangle.NO_BORDER);
-            cliTel.setBorder(Rectangle.NO_BORDER);
-            cliDir.setBorder(Rectangle.NO_BORDER);
-            prov.addCell(cliNom);
-            prov.addCell(cliTel);
-            prov.addCell(cliDir);
-
-            String prove = "SELECT * FROM proveedor WHERE nombre = ?";
-            try (Connection con = cn.getConnection();
-                 PreparedStatement ps = con.prepareStatement(prove)) {
-                ps.setString(1, proveedor);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        prov.addCell(new Phrase(rs.getString("nombre"), fuente));
-                        prov.addCell(new Phrase(rs.getString("telefono"), fuente));
-                        prov.addCell(new Phrase(rs.getString("direccion") + "\n\n", fuente));
-                    } else {
-                        prov.addCell(new Phrase("Publico en General", fuente));
-                        prov.addCell(new Phrase("S/N", fuente));
-                        prov.addCell(new Phrase("S/N" + "\n\n", fuente));
-                    }
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
-            doc.add(prov);
-
-            // Tabla de productos
-            PdfPTable tabla = new PdfPTable(4);
-            tabla.setWidthPercentage(100);
-            tabla.getDefaultCell().setBorder(0);
-            float[] columnWidths = new float[]{10f, 50f, 15f, 15f};
-            tabla.setWidths(columnWidths);
-            tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
-
-            PdfPCell c1 = new PdfPCell(new Phrase("Cant.", fuenteNegrita));
-            PdfPCell c2 = new PdfPCell(new Phrase("Artículo", fuenteNegrita));
-            PdfPCell c3 = new PdfPCell(new Phrase("P. Unit.", fuenteNegrita));
-            PdfPCell c4 = new PdfPCell(new Phrase("P. Total", fuenteNegrita));
-            c1.setBorder(Rectangle.NO_BORDER);
-            c2.setBorder(Rectangle.NO_BORDER);
-            c3.setBorder(Rectangle.NO_BORDER);
-            c4.setBorder(Rectangle.NO_BORDER);
-            c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            c3.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            c4.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            tabla.addCell(c1);
-            tabla.addCell(c2);
-            tabla.addCell(c3);
-            tabla.addCell(c4);
-
-            double subtotal = 0.0;
-            String product = "SELECT d.cantidad, p.nombre, d.precio FROM detalle_compra d INNER JOIN productos p ON d.id_producto = p.id WHERE d.id_compra = ?";
-            try (Connection con = cn.getConnection();
-                 PreparedStatement ps = con.prepareStatement(product)) {
-                ps.setInt(1, idcompra);
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        double subTotal = rs.getInt("cantidad") * rs.getDouble("precio");
-                        subtotal += subTotal;
-                        tabla.addCell(new Phrase(rs.getString("cantidad"), fuente));
-                        tabla.addCell(new Phrase(rs.getString("nombre"), fuente));
-                        tabla.addCell(new Phrase(String.format("%.2f", rs.getDouble("precio")), fuente));
-                        tabla.addCell(new Phrase(String.format("%.2f", subTotal), fuente));
-                    }
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
-            doc.add(tabla);
-
-            double igv = subtotal * 0;
-            double totalVenta = subtotal + igv;
-
-            // Total y resumen de pagos
-            Paragraph totales = new Paragraph(String.format(
-                    "\n\nSub-total: S/ %.2f\nIGV: S/ %.2f\nTotal venta: S/ %.2f\n\n", subtotal, igv, totalVenta), fuente);
-            totales.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(totales);
-
-            Paragraph son = new Paragraph(String.format("Son: %s con %d/100 soles\n\n", NumeroALetras.convertNumberToLetter((int) totalVenta), (int) ((totalVenta - (int) totalVenta) * 100)), fuente);
-            son.setAlignment(Element.ALIGN_LEFT);
-            doc.add(son);
-
-            // Forma de pago
-            Paragraph formaDePago = new Paragraph("Forma de pago\n\n", fuenteNegrita);
-            formaDePago.setAlignment(Element.ALIGN_LEFT);
-            doc.add(formaDePago);
-
-            PdfPTable pago = new PdfPTable(3);
-            pago.setWidthPercentage(100);
-            pago.getDefaultCell().setBorder(0);
-            float[] columnWidthsPago = new float[]{50f, 25f, 25f};
-            pago.setWidths(columnWidthsPago);
-            pago.setHorizontalAlignment(Element.ALIGN_LEFT);
-
-            PdfPCell fpEfectivo = new PdfPCell(new Phrase("Efectivo", fuenteNegrita));
-            PdfPCell fpPagoCon = new PdfPCell(new Phrase("Pago con", fuenteNegrita));
-            PdfPCell fpVuelto = new PdfPCell(new Phrase("Vuelto", fuenteNegrita));
-            fpEfectivo.setBorder(Rectangle.NO_BORDER);
-            fpPagoCon.setBorder(Rectangle.NO_BORDER);
-            fpVuelto.setBorder(Rectangle.NO_BORDER);
-            pago.addCell(fpEfectivo);
-            pago.addCell(fpPagoCon);
-            pago.addCell(fpVuelto);
-
-            pago.addCell(new Phrase("S/ " + total, fuente));
-            pago.addCell(new Phrase("S/ 0.00", fuente)); // Assuming no payment with other methods
-            pago.addCell(new Phrase("S/ 0.00", fuente)); // Assuming no change required
-            doc.add(pago);
-
-            // Firma
-            Paragraph firma = new Paragraph("\nCancelación\n\n------------------------------------\nFirma\n", fuenteNegrita);
-            firma.setAlignment(Element.ALIGN_CENTER);
-            doc.add(firma);
-
-            // Mensaje
-            Paragraph gr = new Paragraph(mensaje, fuenteNegrita);
-            gr.setAlignment(Element.ALIGN_CENTER);
-            doc.add(gr);
-
-            // Agradecimiento
-            Paragraph agradecimiento = new Paragraph("\n\nGRACIAS POR SU COMPRA!!", fuenteNegrita);
-            agradecimiento.setAlignment(Element.ALIGN_CENTER);
-            doc.add(agradecimiento);
-
-            doc.close();
-            archivo.close();
-            Desktop.getDesktop().open(salida);
-        } catch (DocumentException | IOException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
+
+        Paragraph empresaInfoFija = new Paragraph(
+            nombreEmpresa + "\n" +
+            "RUC: " + ruc + "\n" +
+            direccion + "\n" +
+            "Teléfono: " + telefono + "\n" +
+            //"Email: " + email + "\n\n" +
+            "BOLETA DE COMPRA ELECTRÓNICA\nNúmero: B001-001\n\n", 
+            fuenteNegrita
+        );
+        empresaInfoFija.setAlignment(Element.ALIGN_CENTER);
+        doc.add(empresaInfoFija);
+
+        // Fecha y folio
+        Paragraph fecha = new Paragraph("Fecha y hora: " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date) + "\n\n", fuente);
+        fecha.setAlignment(Element.ALIGN_RIGHT);
+        doc.add(fecha);
+
+        // Información del proveedor
+        PdfPTable prov = new PdfPTable(4); // Actualizar a 4 columnas
+        prov.setWidthPercentage(100);
+        prov.getDefaultCell().setBorder(0);
+        float[] columnWidthsCliente = new float[]{30f, 30f, 30f, 30f}; // Ajuste de las columnas para que quepan en el espacio
+        prov.setWidths(columnWidthsCliente);
+        prov.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+        // Encabezados de la tabla
+        PdfPCell cliNom = new PdfPCell(new Phrase("Nombre", fuenteNegrita));
+        PdfPCell cliCOD = new PdfPCell(new Phrase("CodCompra", fuenteNegrita));
+        PdfPCell cliTel = new PdfPCell(new Phrase("Teléfono", fuenteNegrita));
+        PdfPCell cliDir = new PdfPCell(new Phrase("Dirección", fuenteNegrita));
+
+        cliNom.setBorder(Rectangle.NO_BORDER);
+        cliCOD.setBorder(Rectangle.NO_BORDER);
+        cliTel.setBorder(Rectangle.NO_BORDER);
+        cliDir.setBorder(Rectangle.NO_BORDER);
+
+        prov.addCell(cliNom);
+        prov.addCell(cliCOD);
+        prov.addCell(cliTel);
+        prov.addCell(cliDir);
+
+        String prove = "SELECT * FROM proveedor WHERE nombre = ?";
+        try (Connection con = cn.getConnection();
+             PreparedStatement ps = con.prepareStatement(prove)) {
+            ps.setString(1, proveedor);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Aquí puedes establecer un número de 6 dígitos para CodCompra
+                    String codCompra = String.format("%06d", idcompra);
+
+                    prov.addCell(new Phrase(rs.getString("nombre"), fuente));
+                    prov.addCell(new Phrase(codCompra, fuente)); // Agregamos el número de 6 dígitos
+                    prov.addCell(new Phrase(rs.getString("telefono"), fuente));
+
+                    // Ajustar la dirección para que se ajuste al ancho de la celda
+                    PdfPCell direccionCell = new PdfPCell(new Phrase(rs.getString("direccion"), fuente));
+                    direccionCell.setBorder(Rectangle.NO_BORDER);
+                    direccionCell.setNoWrap(false); // Permitir ajuste de texto dentro de la celda
+                    prov.addCell(direccionCell);
+                } else {
+                    // Cuando no hay proveedor encontrado, asignamos valores por defecto
+                    prov.addCell(new Phrase("Publico en General", fuente));
+                    prov.addCell(new Phrase("S/N", fuente)); // CodCompra por defecto
+                    prov.addCell(new Phrase("S/N", fuente));
+                    prov.addCell(new Phrase("S/N" + "\n\n", fuente)); // Dirección por defecto
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        doc.add(prov);
+
+        // Tabla de productos
+        PdfPTable tabla = new PdfPTable(4);
+        tabla.setWidthPercentage(100);
+        tabla.getDefaultCell().setBorder(0);
+        float[] columnWidths = new float[]{10f, 50f, 15f, 15f};
+        tabla.setWidths(columnWidths);
+        tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+        PdfPCell c1 = new PdfPCell(new Phrase("Cant.", fuenteNegrita));
+        PdfPCell c2 = new PdfPCell(new Phrase("Artículo", fuenteNegrita));
+        PdfPCell c3 = new PdfPCell(new Phrase("P. Unit.", fuenteNegrita));
+        PdfPCell c4 = new PdfPCell(new Phrase("P. Total", fuenteNegrita));
+        c1.setBorder(Rectangle.NO_BORDER);
+        c2.setBorder(Rectangle.NO_BORDER);
+        c3.setBorder(Rectangle.NO_BORDER);
+        c4.setBorder(Rectangle.NO_BORDER);
+        c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        c3.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        c4.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        tabla.addCell(c1);
+        tabla.addCell(c2);
+        tabla.addCell(c3);
+        tabla.addCell(c4);
+
+        double subtotal = 0.0;
+        String product = "SELECT d.cantidad, p.nombre, d.precio FROM detalle_compra d INNER JOIN productos p ON d.id_producto = p.id WHERE d.id_compra = ?";
+        try (Connection con = cn.getConnection();
+             PreparedStatement ps = con.prepareStatement(product)) {
+            ps.setInt(1, idcompra);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    double subTotal = rs.getInt("cantidad") * rs.getDouble("precio");
+                    subtotal += subTotal;
+                    tabla.addCell(new Phrase(rs.getString("cantidad"), fuente));
+                    tabla.addCell(new Phrase(rs.getString("nombre"), fuente));
+                    tabla.addCell(new Phrase(String.format("%.2f", rs.getDouble("precio")), fuente));
+                    tabla.addCell(new Phrase(String.format("%.2f", subTotal), fuente));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        doc.add(tabla);
+
+        double igv = subtotal * 0;
+        double totalVenta = subtotal + igv;
+
+        // Total y resumen de pagos
+        Paragraph totales = new Paragraph(String.format(
+                "\n\nSub-total: S/ %.2f\nIGV: S/ %.2f\nTotal venta: S/ %.2f\n\n", subtotal, igv, totalVenta), fuente);
+        totales.setAlignment(Element.ALIGN_RIGHT);
+        doc.add(totales);
+
+        Paragraph son = new Paragraph(String.format("Son: %s con %d/100 soles\n\n", NumeroALetras.convertNumberToLetter((int) totalVenta), (int) ((totalVenta - (int) totalVenta) * 100)), fuente);
+        son.setAlignment(Element.ALIGN_LEFT);
+        doc.add(son);
+
+        // Forma de pago
+        Paragraph formaDePago = new Paragraph("Forma de pago\n\n", fuenteNegrita);
+        formaDePago.setAlignment(Element.ALIGN_LEFT);
+        doc.add(formaDePago);
+
+        PdfPTable pago = new PdfPTable(3);
+        pago.setWidthPercentage(100);
+        pago.getDefaultCell().setBorder(0);
+        float[] columnWidthsPago = new float[]{50f, 25f, 25f};
+        pago.setWidths(columnWidthsPago);
+        pago.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+        PdfPCell fpEfectivo = new PdfPCell(new Phrase("Efectivo", fuenteNegrita));
+        PdfPCell fpPagoCon = new PdfPCell(new Phrase("Pago con", fuenteNegrita));
+        PdfPCell fpVuelto = new PdfPCell(new Phrase("Vuelto", fuenteNegrita));
+        fpEfectivo.setBorder(Rectangle.NO_BORDER);
+        fpPagoCon.setBorder(Rectangle.NO_BORDER);
+        fpVuelto.setBorder(Rectangle.NO_BORDER);
+        pago.addCell(fpEfectivo);
+        pago.addCell(fpPagoCon);
+        pago.addCell(fpVuelto);
+
+        pago.addCell(new Phrase("S/ " + total, fuente));
+        pago.addCell(new Phrase("S/ 0.00", fuente)); // Assuming no payment with other methods
+        pago.addCell(new Phrase("S/ 0.00", fuente)); // Assuming no change required
+        doc.add(pago);
+
+        // Firma
+        Paragraph firma = new Paragraph("\nCancelación\n\n------------------------------------\nFirma\n", fuenteNegrita);
+        firma.setAlignment(Element.ALIGN_CENTER);
+        doc.add(firma);
+
+        // Mensaje
+        Paragraph gr = new Paragraph(mensaje, fuenteNegrita);
+        gr.setAlignment(Element.ALIGN_CENTER);
+        doc.add(gr);
+
+        // Agradecimiento
+        Paragraph agradecimiento = new Paragraph("\n\nBienes Producidos y Consumidos en la Amazonía!!", fuenteNegrita);
+        agradecimiento.setAlignment(Element.ALIGN_CENTER);
+        doc.add(agradecimiento);
+
+        doc.close();
+        archivo.close();
+        Desktop.getDesktop().open(salida);
+    } catch (DocumentException | IOException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
     }
+}
 
     // Conexión a la base de datos (asume que tienes un método cn.getConnection() configurado)
     private static class cn {
